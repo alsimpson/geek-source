@@ -1,30 +1,32 @@
 import React from "react";
 import styled from "styled-components";
-import ShoppingCart from "../assets/svg/shopping-cart-outline.svg";
+import ShoppingCartIcon from "../icons/ShoppingCartIcon";
 
-const Main = styled("div")`
+const Main = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin: 0;
   padding: 0;
   font-size: 0.8rem;
 `;
-const ItemsText = styled("p")`
+const ItemsText = styled.div`
   flex: 1;
-  margin: 10% auto;
-  padding: 2px 5px 0 0;
-`
-const ShoppingCartImage = styled("img")`
-  margin: 10% auto;
-  width: 25px;
-  height: 23px;
-`
+  margin: 0;
+  padding: 0;
+`;
+const ShoppingCartImage = styled.div`
+  margin: 0;
+  padding: 0;
+`;
 
-function ItemsInCart(props){
-  return(
+function ItemsInCart(props) {
+  return (
     <Main>
       <ItemsText>{props.items} items in your cart</ItemsText>
-      <ShoppingCartImage src={ShoppingCart}/>
+      <ShoppingCartImage>
+        <ShoppingCartIcon color={props.color} />
+      </ShoppingCartImage>
     </Main>
   );
 }
