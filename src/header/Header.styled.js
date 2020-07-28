@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { colors } from "../constants/colors";
 import logo from "../assets/logo.png";
 import DropDown from "../buttons/DropDown.styled";
-import Search from "../search/Search";
+import Search from "../search/Search.styled";
 import ItemsInCart from "../itemsincart/ItemsInCart.styled";
 
 /* Temporary data for testing buttons: remove later */
@@ -14,27 +14,30 @@ const savedItems = [{ id: 0, title: "No data", selected: false, key: "saved" }];
 const Main = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0.5% 10% 0 10%;
+  margin: 0.5% 5% 0 5%;
 `;
 
 const HeaderTop = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
+  margin: 0;
+  padding: 0;
   background-color: ${colors.white};
   color: ${colors.secondary};
 `;
 
 const HeaderLogo = styled.img`
-  height: 30px;
-  width: 60px;
-  margin: 0 2% 0 2%;
+  height: 40px;
+  width: 70px;
+  margin-left: 1%;
   padding: 0;
 `;
 
 const Cart = styled.div`
-  margin: 0 0 0 30%;
+  margin-right: 1%;
+  margin-left: 30%;
 `;
 
 const HeaderNav = styled.div`

@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../constants/colors";
+import Shop from "../footershop/Shop.styled";
+import QuickLinks from "../quicklinks/QuickLinks.styled";
+import Search from "../search/Search.styled";
 import ItemsInCart from "../itemsincart/ItemsInCart.styled";
 import CopyrightIcon from "../icons/CopyrightIcon";
 import CcVisaIcon from "../icons/CcVisaIcon";
@@ -8,10 +11,13 @@ import CcMastercardIcon from "../icons/CcMastercardIcon";
 import CcAmexIcon from "../icons/CcAmexIcon";
 import CcApplePay from "../icons/CcApplePayIcon";
 
+/* Temporary data for testing buttons: remove later */
+import { products } from "../mockdata/products";
+
 const Main = styled.footer`
   display: flex;
   flex-direction: column;
-  margin: 10% 10% 0 10%;
+  margin: 10% 5% 0 5%;
   background-color: ${colors.primaryDark};
   color: ${colors.grey};
 `;
@@ -19,24 +25,26 @@ const Main = styled.footer`
 const FooterTop = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  width: 100%;
+  justify-content: space-between;
+  align-items: start;
+  margin: 0;
   padding: 0 2%;
 `;
 const CartArea = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 1%;
 `;
 const PayIcons = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
-  margin: 0;
+  justify-content: space-evenly;
+  margin-top: 25%;
   padding: 0;
 `;
 const CcIcon = styled.div`
-  margin: 0 10% 0 0;
+  margin-right: 10%;
   padding: 0;
 `;
 
@@ -66,6 +74,9 @@ function Footer() {
   return (
     <Main>
       <FooterTop>
+        <Shop list={products} />
+        <QuickLinks />
+        <Search />
         <CartArea>
           <ItemsInCart items='0' color={colors.grey} />
           <PayIcons>
