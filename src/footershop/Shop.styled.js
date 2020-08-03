@@ -20,6 +20,7 @@ const ListItem = styled.li`
   color: ${colors.grey};
   &:hover {
     color: ${colors.white};
+    cursor: pointer;
   }
 `;
 
@@ -29,7 +30,7 @@ function Shop(props) {
       <ListHeader>SHOP</ListHeader>
       <List>
         {props.list.map((item) => (
-          <ListItem key={item.id}>{item.title}</ListItem>
+          <ListItem key={item.id}>{item.name}</ListItem>
         ))}
       </List>
     </Main>

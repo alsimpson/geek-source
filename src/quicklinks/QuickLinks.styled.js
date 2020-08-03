@@ -22,6 +22,7 @@ const ListItem = styled.li`
   color: ${colors.grey};
   &:hover {
     color: ${colors.white};
+    cursor: pointer;
   }
 `;
 

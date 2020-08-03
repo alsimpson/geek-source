@@ -2,12 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { colors } from "../constants/colors";
 import logo from "../assets/logo.png";
-import DropDown from "../buttons/DropDown.styled";
+import DropDownList from "../buttons/DropDownList.styled";
 import Search from "../search/Search.styled";
 import ItemsInCart from "../itemsincart/ItemsInCart.styled";
 
 /* Temporary data for testing buttons: remove later */
-import { products } from "../mockdata/products";
 const recentlyViewed = [{ id: 0, title: "No data", selected: false, key: "viewed"}];
 const savedItems = [{ id: 0, title: "No data", selected: false, key: "saved" }];
 
@@ -49,7 +48,7 @@ const HeaderNav = styled.div`
   border-top: 1px solid black;
 `;
 
-function Header() {
+function Header(props) {
     return (
         <Main>
           <HeaderTop>
@@ -60,9 +59,9 @@ function Header() {
             </Cart>
           </HeaderTop>
           <HeaderNav>
-            <DropDown title='PRODUCTS' list={products} />
-            <DropDown title='RECENTLY VIEWED' list={recentlyViewed} />
-            <DropDown title='SAVED ITEMS' list={savedItems} />
+            <DropDownList title='PRODUCTS' list={props.list} />
+            <DropDownList title='RECENTLY VIEWED' list={recentlyViewed} />
+            <DropDownList title='SAVED ITEMS' list={savedItems} />
           </HeaderNav>
         </Main>
     );

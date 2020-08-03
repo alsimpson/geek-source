@@ -42,6 +42,7 @@ const ListItem = styled("li")`
   margin-bottom: 0.5em;
   &:hover {
     font-weight: bold;
+    cursor: pointer;
   }
 `;
 
@@ -66,8 +67,8 @@ function DropDown2(props) {
         {isOpen && (
           <DropDownList>
             {props.list.map((item) => (
-              <ListItem onClick={onOptionClicked(item.title)} key={item.id}>
-                {item.title}
+              <ListItem onClick={onOptionClicked(item.url)} key={item.id}>
+                {item.name}
               </ListItem>
             ))}
           </DropDownList>

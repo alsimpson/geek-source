@@ -13,6 +13,7 @@ const Main = styled("div")`
 `;
 const SearchText=styled("input")`
   border: none;
+  background-color: inherit;
 `;
 
 function Search() {

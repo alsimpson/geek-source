@@ -11,13 +11,10 @@ import CcMastercardIcon from "../icons/CcMastercardIcon";
 import CcAmexIcon from "../icons/CcAmexIcon";
 import CcApplePay from "../icons/CcApplePayIcon";
 
-/* Temporary data for testing buttons: remove later */
-import { products } from "../mockdata/products";
-
 const Main = styled.footer`
   display: flex;
   flex-direction: column;
-  margin: 10% 5% 0 5%;
+  margin: 5% 5% 0 5%;
   background-color: ${colors.primaryDark};
   color: ${colors.grey};
 `;
@@ -70,11 +67,11 @@ const CopyrightText = styled.div`
   padding: 0;
 `;
 
-function Footer() {
+function Footer(props) {
   return (
     <Main>
       <FooterTop>
-        <Shop list={products} />
+        <Shop list={props.list} />
         <QuickLinks />
         <Search />
         <CartArea>

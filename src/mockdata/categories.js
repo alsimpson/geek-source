@@ -1,4 +1,4 @@
-export const products = [
+export const categories = [
   {"id": 0, "title": "TV & Home Theater", "selected": false, "key": "product"},
   {"id": 1, "title": "Computers & Tables", "selected": false, "key": "product"},
   {"id": 2, "title": "Appliances", "selected": false, "key": "product"},
