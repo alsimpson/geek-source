@@ -50,7 +50,7 @@ function StyledHeader(props) {
             <HeaderLogo src={logo} alt='logo' />
             <StyledSearch />
             <Cart>
-              <tyledItemsInCart items='0' color={colors.secondary} />
+              <StyledItemsInCart items='0' color={colors.secondary} />
             </Cart>
           </HeaderTop>
           <HeaderNav>
