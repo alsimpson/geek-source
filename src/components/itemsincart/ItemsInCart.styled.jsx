@@ -20,7 +20,7 @@ const ShoppingCartImage = styled.div`
   padding: 0;
 `;
 
-function ItemsInCart(props) {
+function StyledItemsInCart(props) {
   return (
     <Main>
       <ItemsText>{props.items} items in your cart</ItemsText>
@@ -31,4 +31,4 @@ function ItemsInCart(props) {
   );
 }
 
-export default ItemsInCart;
+export default StyledItemsInCart;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { globalVars } from "../../constants/globalvars";
 import { colors } from "../../constants/colors";
 import styled from "styled-components";
-import Button from "../../buttons/Button.styled";
+import StyledButton from "../components/buttons/Button.styled";
 import StarRatingShow from "../../starrating/StarRatingShow.styled";
 
 const Main = styled.div`
@@ -93,10 +93,11 @@ function StyledHottestDeal() {
 
   useEffect(() => {
     if (!isLoaded) {
-      getHotDeal()
+      getHotDeal()  /*TODO refactor based Wes' suggestion */
     };
   }, [isLoaded]);
-
+  
+/* TODO move outside to separate service help module */
   const getHotDeal = async () => {
     try {
       const url =
@@ -143,7 +144,7 @@ function StyledHottestDeal() {
           </RegPrice>
         </PriceArea>
         <ButtonArea>
-          <Button text='BUY NOW' />
+          <StyledButton text='BUY NOW' />
           <ShopAllText>shop all deals</ShopAllText>
         </ButtonArea>
       </Main>

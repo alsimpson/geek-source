@@ -3,8 +3,8 @@ import { globalVars } from "../../constants/globalvars";
 import { colors } from "../../constants/colors";
 import styled from "styled-components";
 import StarRatingShow from "../../starrating/StarRatingShow.styled";
-import ShoppingCartAddIcon from "../../icons/ShoppingCartAddIcon";
-import ArrowIcon from "../../icons/ArrowIcon";
+import ShoppingCartAddIcon from "../icons/ShoppingCartAddIcon";
+import ArrowIcon from "../icons/ArrowIcon";
 
 const Main = styled.div`
   display: flex;
@@ -116,11 +116,11 @@ function StyledProductsCarousel(props) {
 
   useEffect(() => {
     if (!isLoaded) {
-      getFeatureProducts(props.type); /* call API */
+      getFeatureProducts(props.type); /* TODO refactor based on Wes' suggestion */
     };
   }, [isLoaded, props.type]);
 
-  /* Bestbuy Products API call */
+  /* TODO move out to helper module Bestbuy Products API call */
   const getFeatureProducts = async (param) => {
     try {
       const url =

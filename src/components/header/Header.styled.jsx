@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { colors } from "../../constants/colors";
 import logo from "../../assets/logo.png";
-import DropDownList from "../../buttons/DropDownList.styled";
-import Search from "../../search/Search.styled";
-import ItemsInCart from "../../itemsincart/ItemsInCart.styled";
+import StyledDropDownList from "../../buttons/DropDownList.styled";
+import StyledSearch from "../../search/Search.styled";
+import StyledItemsInCart from "../../itemsincart/ItemsInCart.styled";
 
 const Main = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ const HeaderNav = styled.div`
   color: ${colors.white};
   border-top: 1px solid black;
 `;
-/* TODO build component for recenlty viewed & saved items*/
+/* TODO build component for recently viewed & saved items*/
 const recentlyViewed = [];
 const savedItems = [];
 
@@ -48,15 +48,15 @@ function StyledHeader(props) {
         <Main>
           <HeaderTop>
             <HeaderLogo src={logo} alt='logo' />
-            <Search />
+            <StyledSearch />
             <Cart>
-              <ItemsInCart items='0' color={colors.secondary} />
+              <tyledItemsInCart items='0' color={colors.secondary} />
             </Cart>
           </HeaderTop>
           <HeaderNav>
-            <DropDownList title='PRODUCTS' list={props.products} />
-            <DropDownList title='RECENTLY VIEWED' list={recentlyViewed} />
-            <DropDownList title='SAVED ITEMS' list={savedItems} />
+            <StyledDropDownList title='PRODUCTS' list={props.products} />
+            <StyledDropDownList title='RECENTLY VIEWED' list={recentlyViewed} />
+            <StyledDropDownList title='SAVED ITEMS' list={savedItems} />
           </HeaderNav>
         </Main>
     );

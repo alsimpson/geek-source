@@ -55,6 +55,8 @@ function Homepage() {
     }
   }
 
+  /* TODO refactor IconArea components to single component */
+  
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { colors } from "../../constants/colors";
 import imageSrc from "../../assets/movie_theme.png";
 import imageTV from "../../assets/curved_tv.png";
-import Button from "../../buttons/Button.styled";
+import StyledButton from "../../buttons/Button.styled";
 
 const Main = styled.div`
   display: flex;
@@ -55,7 +55,7 @@ function StyledHeroImage() {
       <ButtonArea>
         <Text1>CURVED 4K SMART TVs</Text1>
         <Text2>Experience the action and drama like never before.</Text2>
-        <Button text='SHOP NOW' />
+        <StyledButton text='SHOP NOW' />
       </ButtonArea>
       <Image src={imageTV} alt="smart tv" />
     </Main>

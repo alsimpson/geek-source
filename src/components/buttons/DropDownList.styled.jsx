@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ArrowIcon from "../icons/ArrowIcon";
+import ArrowIcon from "../../icons/ArrowIcon";
 
 const Main = styled("div")`
   font-family: sans-serif;
@@ -46,7 +46,7 @@ const ListItem = styled("li")`
   }
 `;
 
-function DropDown2(props) {
+function StyledDropDown(props) {
   const [isOpen, setIsOpen] = useState(false);
 //  const [selectedOption, setSelectedOption] = useState(null);
 
@@ -78,4 +78,4 @@ function DropDown2(props) {
   );
 }
 
-export default DropDown2;
+export default StyledDropDown;

@@ -23,7 +23,7 @@ const Main = styled.div`
   display: inline-block;
 `;
 
-function StarRatingShow(props) {
+function StyledStarRatingShow(props) {
   return (
     <Main>
       {getStars(props.Rating).map((star, index) => {
@@ -33,4 +33,4 @@ function StarRatingShow(props) {
   );
 }
 
-export default StarRatingShow;
+export default StyledStarRatingShow;

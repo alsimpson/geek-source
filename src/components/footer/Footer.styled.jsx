@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../../constants/colors";
-import Shop from "../../footershop/Shop.styled";
-import QuickLinks from "../../quicklinks/QuickLinks.styled";
-import Search from "../../search/Search.styled";
-import ItemsInCart from "../../itemsincart/ItemsInCart.styled";
-import CopyrightIcon from "../../icons/CopyrightIcon";
-import CcVisaIcon from "../../icons/CcVisaIcon";
-import CcMastercardIcon from "../../icons/CcMastercardIcon";
-import CcAmexIcon from "../../icons/CcAmexIcon";
-import CcApplePay from "../../icons/CcApplePayIcon";
+import StyledShopList from "./ShopList.styled";
+import StyledQuickLinks from "./QuickLinks.styled";
+import StyledSearch from "../search/Search.styled";
+import StyledItemsInCart from "../itemsincart/ItemsInCart.styled";
+import CopyrightIcon from "../icons/CopyrightIcon";
+import CcVisaIcon from "../icons/CcVisaIcon";
+import CcMastercardIcon from "../icons/CcMastercardIcon";
+import CcAmexIcon from "../icons/CcAmexIcon";
+import CcApplePay from "../icons/CcApplePayIcon";
 
 const Main = styled.footer`
   display: flex;
@@ -18,7 +18,6 @@ const Main = styled.footer`
   background-color: ${colors.primaryDark};
   color: ${colors.grey};
 `;
-
 const FooterTop = styled.div`
   display: flex;
   flex-direction: row;
@@ -44,7 +43,6 @@ const CcIcon = styled.div`
   margin-right: 10%;
   padding: 0;
 `;
-
 const FooterBottom = styled.div`
   font-size: 0.8rem;
   margin: 1% 0;
@@ -71,11 +69,11 @@ function StyledFooter(props) {
   return (
     <Main>
       <FooterTop>
-        <Shop list={props.shopCategories} />
-        <QuickLinks />
-        <Search />
+        <StyledShopList list={props.shopCategories} />
+        <StyledQuickLinks />
+        <StyledSearch />
         <CartArea>
-          <ItemsInCart items='0' color={colors.grey} />
+          <StyledItemsInCart items='0' color={colors.grey} />
           <PayIcons>
             <CcIcon>
               <CcVisaIcon />

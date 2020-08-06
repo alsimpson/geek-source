@@ -13,7 +13,7 @@ const TheButton = styled.button`
   cursor: pointer;
 `;
 
-function Button(props) {
+function StyledButton(props) {
   return (
     <TheButton>
       {props.text}
@@ -21,4 +21,4 @@ function Button(props) {
   )
 }
 
-export default Button;
+export default StyledButton;

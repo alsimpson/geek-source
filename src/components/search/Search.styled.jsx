@@ -16,7 +16,7 @@ const SearchText=styled("input")`
   background-color: inherit;
 `;
 
-function Search() {
+function StyledSearch() {
   return (
     <Main>
       <SearchIcon />
@@ -26,4 +26,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default StyledSearch;
