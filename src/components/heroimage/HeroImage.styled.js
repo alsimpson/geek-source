@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "../constants/colors";
-import imageSrc from "../assets/movie_theme.png";
-import imageTV from "../assets/curved_tv.png";
-import Button from "../buttons/Button.styled";
+import { colors } from "../../constants/colors";
+import imageSrc from "../../assets/movie_theme.png";
+import imageTV from "../../assets/curved_tv.png";
+import Button from "../../buttons/Button.styled";
 
 const Main = styled.div`
   display: flex;
@@ -49,7 +49,7 @@ const Image = styled.img`
   align-self: center;
 `;
 
-function HeroImage() {
+function StyledHeroImage() {
   return (
     <Main>
       <ButtonArea>
@@ -62,4 +62,4 @@ function HeroImage() {
   );
 }
 
-export default HeroImage;
+export default StyledHeroImage;

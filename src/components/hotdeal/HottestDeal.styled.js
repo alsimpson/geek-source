@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { globalVars } from "../constants/globalvars";
-import { colors } from "../constants/colors";
+import { globalVars } from "../../constants/globalvars";
+import { colors } from "../../constants/colors";
 import styled from "styled-components";
-import Button from "../buttons/Button.styled";
-import StarRatingShow from "../starrating/StarRatingShow.styled";
+import Button from "../../buttons/Button.styled";
+import StarRatingShow from "../../starrating/StarRatingShow.styled";
 
 const Main = styled.div`
   display: flex;
@@ -86,7 +86,7 @@ const ShopAllText = styled.div`
   font-weight: bold;
 `;
 
-function HottestDeal() {
+function StyledHottestDeal() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hotDeal, setHotDeal] = useState([]);
@@ -151,4 +151,4 @@ function HottestDeal() {
   }
 }
 
-export default HottestDeal;
+export default StyledHottestDeal;

@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "../constants/colors";
-import Shop from "../footershop/Shop.styled";
-import QuickLinks from "../quicklinks/QuickLinks.styled";
-import Search from "../search/Search.styled";
-import ItemsInCart from "../itemsincart/ItemsInCart.styled";
-import CopyrightIcon from "../icons/CopyrightIcon";
-import CcVisaIcon from "../icons/CcVisaIcon";
-import CcMastercardIcon from "../icons/CcMastercardIcon";
-import CcAmexIcon from "../icons/CcAmexIcon";
-import CcApplePay from "../icons/CcApplePayIcon";
+import { colors } from "../../constants/colors";
+import Shop from "../../footershop/Shop.styled";
+import QuickLinks from "../../quicklinks/QuickLinks.styled";
+import Search from "../../search/Search.styled";
+import ItemsInCart from "../../itemsincart/ItemsInCart.styled";
+import CopyrightIcon from "../../icons/CopyrightIcon";
+import CcVisaIcon from "../../icons/CcVisaIcon";
+import CcMastercardIcon from "../../icons/CcMastercardIcon";
+import CcAmexIcon from "../../icons/CcAmexIcon";
+import CcApplePay from "../../icons/CcApplePayIcon";
 
 const Main = styled.footer`
   display: flex;
@@ -67,11 +67,11 @@ const CopyrightText = styled.div`
   padding: 0;
 `;
 
-function Footer(props) {
+function StyledFooter(props) {
   return (
     <Main>
       <FooterTop>
-        <Shop list={props.list} />
+        <Shop list={props.shopCategories} />
         <QuickLinks />
         <Search />
         <CartArea>
@@ -106,4 +106,4 @@ function Footer(props) {
   );
 }
 
-export default Footer;
+export default StyledFooter;

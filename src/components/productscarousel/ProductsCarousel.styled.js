@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { globalVars } from "../constants/globalvars";
-import { colors } from "../constants/colors";
+import { globalVars } from "../../constants/globalvars";
+import { colors } from "../../constants/colors";
 import styled from "styled-components";
-import StarRatingShow from "../starrating/StarRatingShow.styled";
-import ShoppingCartAddIcon from "../icons/ShoppingCartAddIcon";
-import ArrowIcon from "../icons/ArrowIcon";
+import StarRatingShow from "../../starrating/StarRatingShow.styled";
+import ShoppingCartAddIcon from "../../icons/ShoppingCartAddIcon";
+import ArrowIcon from "../../icons/ArrowIcon";
 
 const Main = styled.div`
   display: flex;
@@ -107,7 +107,7 @@ const LeftArrow = styled.div`
   }
 `;
 
-function ProductsCarousel(props) {
+function StyledProductsCarousel(props) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [products, setProducts] = useState([]);
@@ -210,4 +210,4 @@ function ProductsCarousel(props) {
   }
 }
 
-export default ProductsCarousel;
+export default StyledProductsCarousel;

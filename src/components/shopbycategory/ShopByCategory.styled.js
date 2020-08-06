@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "../constants/colors";
+import { colors } from "../../constants/colors";
 
 const Main = styled.div`
   margin: 1% 2% 1% 2%;
@@ -38,13 +38,13 @@ const Line = styled.hr`
   padding: 0;
 `;
 
-function ShopByCategory(props) {
+function StyledShopByCategory(props) {
   return (
     <Main>
       <Line />
       <ListHeader>Shop by Category</ListHeader>
       <List>
-        {props.list.map((item) => (
+        {props.shopCategories.map((item) => (
           <ListItem key={item.id}>
             {item.name}
           </ListItem>
@@ -54,4 +54,4 @@ function ShopByCategory(props) {
   );
 }
 
-export default ShopByCategory;
+export default StyledShopByCategory;

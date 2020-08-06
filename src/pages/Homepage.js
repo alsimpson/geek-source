@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { globalVars } from "../constants/globalvars";
 import styled from "styled-components";
-import Header from "../header/Header.styled";
-import HeroImage from "../heroimage/HeroImage.styled";
-import ProductsCarousel from "../productscarousel/ProductsCarousel.styled";
+import StyledHeader from "../components/header/Header.styled";
+import StyledHeroImage from "../components/heroimage/HeroImage.styled";
+import StyledProductsCarousel from "../../components/productscarousel/ProductsCarousel.styled";
 import FastShipping from "../fastshipping/FastShipping";
 import Financing from "../finance/Financing";
 import TechSupport from "../techsupport/TechSupport";
-import HottestDeal from "../hotdeal/HottestDeal.styled";
-import ShopByCategory from "../shopbycat/ShopByCategory.styled";
-import Footer from "../footer/Footer.styled";
+import StyledHottestDeal from "../components/hotdeal/HottestDeal.styled";
+import StyledShopByCategory from "../components/shopbycategory/ShopByCategory.styled";
+import StyledFooter from "../components/footer/Footer.styled";
 
 const IconArea = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  margin: 0 5% 0 5%;
+  margin: 0 5%;
 `;
 const HotDealArea = styled.div`
   display: flex;
@@ -28,15 +28,15 @@ const HotDealArea = styled.div`
 function Homepage() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
+  const [categoryItems, setCategoryItems] = useState([]);
 
   useEffect(() => {
     if (!isLoaded) {
-      getCategories() /*call API */
+      getCategories() /*TODO refactor based on Wes' recommendation*/
     };
   }, [isLoaded]);
 
-  /* Bestbuy Categories API */
+  /* TODO move Bestbuy Categories API to service helper */
   const getCategories = async () => {
     try {
       const url = "/categories?format=json&apiKey=" + globalVars.apiKey;
@@ -44,7 +44,7 @@ function Homepage() {
       if (response.ok) {
         const data = await response.json();
         setIsLoaded(true);
-        setItems(data.categories);
+        setCategoryItems(data.categories);
       } else {
         setIsLoaded(true);
         setError(response.error);
@@ -62,20 +62,20 @@ function Homepage() {
   } else {
     return (
       <>
-        <Header list={items} />
-        <HeroImage />
+        <StyledHeader products={categoryItems} />
+        <StyledHeroImage />
         <IconArea>
           <FastShipping />
           <Financing />
           <TechSupport />
         </IconArea>
-        <ProductsCarousel header="Featured Products" type="special_offer" />
-        <ProductsCarousel header="Today's Deals" type="digital_insert" />
+        <StyledProductsCarousel header='Featured Products' type='special_offer' />
+        <StyledProductsCarousel header="Today's Deals" type='digital_insert' />
         <HotDealArea>
-          <HottestDeal />
-          <ShopByCategory list={items} />
+          <StyledHottestDeal />
+          <StyledShopByCategory shopCategories={categoryItems} />
         </HotDealArea>
-        <Footer list={items} />
+        <StyledFooter shopCategories={categoryItems} />
       </>
     );
   }
