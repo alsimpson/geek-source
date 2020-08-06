@@ -4,6 +4,7 @@ import { colors } from "../constants/colors";
 import styled from "styled-components";
 import StarRatingShow from "../starrating/StarRatingShow.styled";
 import ShoppingCartAddIcon from "../icons/ShoppingCartAddIcon";
+import ArrowIcon from "../icons/ArrowIcon";
 
 const Main = styled.div`
   display: flex;
@@ -31,28 +32,36 @@ const CarouselArea = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: start;
+  overflow: hidden;
   margin: 1% 0 0 0;
   padding: 0;
   background-color: ${colors.white};
 `;
-const ProductView = styled.div`
-  display: flex;
+const ProductCard = styled.div`
+  display: ${(props) => props.display};
   flex-direction: column;
-  justify-content: start;
-  margin: .5%;
-  padding: .5%;
-  border: 0.5px solid red;
+  justify-content: center;
+  margin: 0.5%;
+  padding: 0.5%;
+  max-width: 200px;
+  min-width: 200px;
+  max-height: 250px;
+  min-height: 250px;
 `;
 const Image = styled.img`
   margin: 0;
-  padding: .5%;
-  object-position: center;
-  object-fit: scale-down;
+  padding: 0.5%;
+  object-fit: contain;
+  object-position: left top;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 const Text = styled.div`
   color: black;
-  font-size: 10px;
-  margin: 0;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 1% 0;
   padding: 0;
 `;
 const ReviewArea = styled.div`
@@ -63,7 +72,7 @@ const ReviewArea = styled.div`
 const ReviewText = styled.div`
   font-size: 12px;
   font-weight: bold;
-  margin: 1% 0 0 2%
+  margin: 1% 0 0 2%;
 `;
 const PriceArea = styled.div`
   display: flex;
@@ -76,16 +85,42 @@ const SalePrice = styled.div`
   font-weight: bold;
   margin-right: 2%;
 `;
+const NavArea = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: ${colors.white};
+`;
+const RightArrow = styled.div`
+  color: red;
+  margin: 0 1% 0 0;
+  padding: 0 .5% 0 .5%;
+  &:hover {
+    cursor: pointer
+  };
+`;
+const LeftArrow = styled.div`
+  color: red;
+  margin: 0;
+  padding: 0 .5% 0 .5%;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 function ProductsCarousel(props) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [products, setProducts] = useState([]);
+  const [currIndex, setCurrIndex] = useState(0);
+  const [hideIndex, setHideIndex] = useState([]);
 
   useEffect(() => {
-    getFeatureProducts(props.type);
+    if (!isLoaded) {
+      getFeatureProducts(props.type); /* call API */
+    };
   }, [isLoaded, props.type]);
 
+  /* Bestbuy Products API call */
   const getFeatureProducts = async (param) => {
     try {
       const url =
@@ -106,6 +141,34 @@ function ProductsCarousel(props) {
     }
   };
 
+  /* Right Arrow Click */
+  const onRightArrowClick = (index) => {
+    let indexArray = hideIndex;
+    if (index < (products.length - 1)) {
+      indexArray.push(index);
+      setHideIndex(indexArray);   /* add slide to hide list */
+      index++;
+      setCurrIndex(index);
+    }
+  };
+
+  /* Left Arrow Click */
+  const onLeftArrowClick = (index) => {
+    let indexArray = hideIndex;
+    if (index > 0) {
+      indexArray.pop(index);
+      setHideIndex(indexArray);   /* add slide to hide list */
+      index--;
+      setCurrIndex(index);
+    }
+  };
+
+  /* check hide list for product card index */
+  const setInvisible = (index) => {
+    return hideIndex.includes(index);
+  };
+
+  /*--- Render Carousel ---*/
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
@@ -116,25 +179,32 @@ function ProductsCarousel(props) {
         <Line />
         <Header>{props.header}</Header>
         <CarouselArea>
-          {products.map((p, index) => {
-            return (
-              <ProductView key={index}>
-                <Image src={p.thumbnailImage} alt='product' />
-                <Text>{p.name}</Text>
-                <ReviewArea>
-                  <StarRatingShow Rating={p.customerReviewAverage} />
-                  <ReviewText>
-                    {p.customerReviewAverage}({p.customerReviewCount})
-                  </ReviewText>
-                </ReviewArea>
-                <PriceArea>
-                  <SalePrice>${p.salePrice}</SalePrice>
-                  <ShoppingCartAddIcon />
-                </PriceArea>
-              </ProductView>
-            );
-          })}
+          {products.map((p, index) => (
+            <ProductCard
+              key={index} display={setInvisible(index) ? "none" : "flex"}>
+              <Image src={p.mediumImage} alt='product' />
+              <Text>{p.name}</Text>
+              <ReviewArea>
+                <StarRatingShow Rating={p.customerReviewAverage} />
+                <ReviewText>
+                  {p.customerReviewAverage}({p.customerReviewCount})
+                </ReviewText>
+              </ReviewArea>
+              <PriceArea>
+                <SalePrice>${p.salePrice}</SalePrice>
+                <ShoppingCartAddIcon />
+              </PriceArea>
+            </ProductCard>
+          ))}
         </CarouselArea>
+        <NavArea>
+          <RightArrow onClick={() => onRightArrowClick(currIndex)}>
+            <ArrowIcon direction='right' />
+          </RightArrow>
+          <LeftArrow onClick={() => onLeftArrowClick(currIndex)}>
+            <ArrowIcon direction='left' />
+          </LeftArrow>
+        </NavArea>
       </Main>
     );
   }

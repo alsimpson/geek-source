@@ -31,8 +31,11 @@ const Header = styled.div`
 const Image = styled.img`
   margin: 0;
   padding: 1%;
+  object-fit: contain;
   object-position: center;
-  object-fit: scale-down;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 const Text = styled.div`
   color: black;
@@ -89,7 +92,9 @@ function HottestDeal() {
   const [hotDeal, setHotDeal] = useState([]);
 
   useEffect(() => {
-    getHotDeal();
+    if (!isLoaded) {
+      getHotDeal()
+    };
   }, [isLoaded]);
 
   const getHotDeal = async () => {

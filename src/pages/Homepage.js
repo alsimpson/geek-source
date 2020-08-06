@@ -31,9 +31,12 @@ function Homepage() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    getCategories();
+    if (!isLoaded) {
+      getCategories() /*call API */
+    };
   }, [isLoaded]);
 
+  /* Bestbuy Categories API */
   const getCategories = async () => {
     try {
       const url = "/categories?format=json&apiKey=" + globalVars.apiKey;
