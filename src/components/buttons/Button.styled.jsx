@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { colors } from "../constants/colors";
+import { colors } from "../../constants/colors";
 
 const TheButton = styled.button`
   background-color: ${colors.secondary};

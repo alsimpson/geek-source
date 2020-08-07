@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { globalVars } from "../../constants/globalvars";
 import { colors } from "../../constants/colors";
 import styled from "styled-components";
-import StyledButton from "../components/buttons/Button.styled";
-import StarRatingShow from "../../starrating/StarRatingShow.styled";
+import StyledButton from "../buttons/Button.styled";
+import StarRatingShow from "../starratingshow/StarRatingShow.styled";
 
 const Main = styled.div`
   display: flex;
@@ -96,7 +96,7 @@ function StyledHottestDeal() {
       getHotDeal()  /*TODO refactor based Wes' suggestion */
     };
   }, [isLoaded]);
-  
+
 /* TODO move outside to separate service help module */
   const getHotDeal = async () => {
     try {

@@ -3,9 +3,18 @@ import styled from "styled-components";
 import { colors } from "../../constants/colors";
 import imageSrc from "../../assets/movie_theme.png";
 import imageTV from "../../assets/curved_tv.png";
-import StyledButton from "../../buttons/Button.styled";
+import StyledButton from "../buttons/Button.styled";
+import ShippingFastIcon from "../icons/ShippingFastIcon";
+import CreditCardIcon from "../icons/CreditCardIcon";
+import HeadsetIcon from "../icons/HeadsetIcon";
 
 const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+`;
+const HeroImage = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -30,15 +39,8 @@ const ButtonArea = styled.div`
   margin: 0%;
   padding: 0;
 `;
-const Text1 = styled.p`
-  font-size: 30px;
-  font-weight: bold;
-  margin: 0;
-  padding: 0;
-`;
-const Text2 = styled.p`
-  color: white;
-  font-size: 12px;
+const Text = styled.p`
+  font-size: ${props => props.size};
   font-weight: bold;
   margin: 0;
   padding: 0;
@@ -48,16 +50,66 @@ const Image = styled.img`
   height: 200px;
   align-self: center;
 `;
+const IconSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-content: center;
+  margin: .5%;
+`;
+const IconTextSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 0;
+  padding: .5%;
+  width: 210px;
+  color: ${colors.grey};
+`;
+const IconText = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin: 0;
+  padding: 0;
+`;
 
 function StyledHeroImage() {
   return (
     <Main>
-      <ButtonArea>
-        <Text1>CURVED 4K SMART TVs</Text1>
-        <Text2>Experience the action and drama like never before.</Text2>
-        <StyledButton text='SHOP NOW' />
-      </ButtonArea>
-      <Image src={imageTV} alt="smart tv" />
+      <HeroImage>
+        <ButtonArea>
+          <Text size='30px'>CURVED 4K SMART TVs</Text>
+          <Text size='12px'>
+            Experience the action and drama like never before.
+          </Text>
+          <StyledButton text='SHOP NOW' />
+        </ButtonArea>
+        <Image src={imageTV} alt='smart tv' />
+      </HeroImage>
+      <IconSection>
+        <IconTextSection>
+          <ShippingFastIcon />
+          <IconText>
+            <Text size='1.2rem'>FREE SHIPPING</Text>
+            <Text size='0.8rem'>on every order</Text>
+          </IconText>
+        </IconTextSection>
+        <IconTextSection>
+          <CreditCardIcon />
+          <IconText>
+            <Text size='1.2rem'>0% Financing</Text>
+            <Text size='0.8rem'>on select products</Text>
+          </IconText>
+        </IconTextSection>
+        <IconTextSection>
+          <HeadsetIcon />
+          <IconText>
+            <Text size='1.2rem'>Free Tech Support</Text>
+            <Text size='0.8rem'>on all products</Text>
+          </IconText>
+        </IconTextSection>
+      </IconSection>
     </Main>
   );
 }

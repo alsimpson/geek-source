@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { globalVars } from "../../constants/globalvars";
 import { colors } from "../../constants/colors";
 import styled from "styled-components";
-import StarRatingShow from "../../starrating/StarRatingShow.styled";
+import StarRatingShow from "../starratingshow/StarRatingShow.styled";
 import ShoppingCartAddIcon from "../icons/ShoppingCartAddIcon";
 import ArrowIcon from "../icons/ArrowIcon";
 

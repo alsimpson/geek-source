@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ArrowIcon from "../../icons/ArrowIcon";
+import ArrowIcon from "../icons/ArrowIcon";
 
 const Main = styled("div")`
   font-family: sans-serif;

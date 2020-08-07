@@ -3,20 +3,11 @@ import { globalVars } from "../constants/globalvars";
 import styled from "styled-components";
 import StyledHeader from "../components/header/Header.styled";
 import StyledHeroImage from "../components/heroimage/HeroImage.styled";
-import StyledProductsCarousel from "../../components/productscarousel/ProductsCarousel.styled";
-import FastShipping from "../fastshipping/FastShipping";
-import Financing from "../finance/Financing";
-import TechSupport from "../techsupport/TechSupport";
+import StyledProductsCarousel from "../components/productscarousel/ProductsCarousel.styled";
 import StyledHottestDeal from "../components/hotdeal/HottestDeal.styled";
 import StyledShopByCategory from "../components/shopbycategory/ShopByCategory.styled";
 import StyledFooter from "../components/footer/Footer.styled";
 
-const IconArea = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  margin: 0 5%;
-`;
 const HotDealArea = styled.div`
   display: flex;
   flex-direction: row;
@@ -56,7 +47,7 @@ function Homepage() {
   }
 
   /* TODO refactor IconArea components to single component */
-  
+
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
@@ -66,11 +57,6 @@ function Homepage() {
       <>
         <StyledHeader products={categoryItems} />
         <StyledHeroImage />
-        <IconArea>
-          <FastShipping />
-          <Financing />
-          <TechSupport />
-        </IconArea>
         <StyledProductsCarousel header='Featured Products' type='special_offer' />
         <StyledProductsCarousel header="Today's Deals" type='digital_insert' />
         <HotDealArea>

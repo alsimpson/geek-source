@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { colors } from "../../constants/colors";
 import logo from "../../assets/logo.png";
-import StyledDropDownList from "../../buttons/DropDownList.styled";
-import StyledSearch from "../../search/Search.styled";
-import StyledItemsInCart from "../../itemsincart/ItemsInCart.styled";
+import StyledDropDownList from "../buttons/DropDownList.styled";
+import StyledSearch from "../search/Search.styled";
+import StyledItemsInCart from "../itemsincart/ItemsInCart.styled";
 
 const Main = styled.div`
   display: flex;
