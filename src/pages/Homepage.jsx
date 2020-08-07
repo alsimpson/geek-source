@@ -18,49 +18,43 @@ const HotDealArea = styled.div`
 `;
 
 function Homepage() {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [categoryItems, setCategoryItems] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!isLoaded) {
-      getCategories() /*TODO refactor based on Wes' recommendation*/
-    };
-  }, [isLoaded]);
-
-  /* TODO move Bestbuy Categories API to service helper */
-  const getCategories = async () => {
-    try {
+    const getCategories = async () => {
       const url = "/categories?format=json&apiKey=" + globalVars.apiKey;
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
-        setIsLoaded(true);
         setCategoryItems(data.categories);
       } else {
-        setIsLoaded(true);
         setError(response.error);
       }
-    } catch (e) {
-        setIsLoaded(true);
-        setError(e);
     }
-  }
+    getCategories();
+  }, []);
 
   if (error) {
     return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div>Loading...</div>;
   } else {
     return (
       <>
         <StyledHeader products={categoryItems} />
         <StyledHeroImage />
-        <StyledProductsCarousel header='Featured Products' type='special_offer' />
-        <StyledProductsCarousel header="Today's Deals" type='digital_insert' />
+        <StyledProductsCarousel
+          header='Featured Products'
+          type='special_offer'
+        />
+        <StyledProductsCarousel
+          header="Today's Deals"
+          type='digital_insert'
+        />
         <HotDealArea>
           <StyledHottestDeal />
-          <StyledShopByCategory shopCategories={categoryItems} />
+          <StyledShopByCategory
+            shopCategories={categoryItems}
+          />
         </HotDealArea>
         <StyledFooter shopCategories={categoryItems} />
       </>

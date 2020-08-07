@@ -105,37 +105,23 @@ const Arrow = styled.div`
 
 function StyledProductsCarousel(props) {
   const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [products, setProducts] = useState([]);
   const [currIndex, setCurrIndex] = useState(0);
   const [hideIndex, setHideIndex] = useState([]);
 
   useEffect(() => {
-    if (!isLoaded) {
-      getFeatureProducts(props.type); /* TODO refactor based on Wes' suggestion */
-    };
-  }, [isLoaded, props.type]);
-
-  /* TODO move out to helper module Bestbuy Products API call */
-  const getFeatureProducts = async (param) => {
-    try {
-      const url =
-        "/products((offers.type=" + param + "))?format=json&apiKey=" +
-        globalVars.apiKey;
+    const getProducts = async (param) => {
+      const url = "/products((offers.type=" + param + "))?format=json&apiKey=" + globalVars.apiKey;
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
-        setIsLoaded(true);
         setProducts(data.products);
       } else {
-        setIsLoaded(true);
         setError(response.error);
       }
-    } catch (e) {
-      setIsLoaded(true);
-      setError(e);
-    }
-  };
+    };
+    getProducts(props.type);
+  }, [props.type]);
 
   /* Right Arrow Click */
   const onRightArrowClick = (index) => {
@@ -167,8 +153,6 @@ function StyledProductsCarousel(props) {
   /*--- Render Carousel ---*/
   if (error) {
     return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div>Loading...</div>;
   } else {
     return (
       <Main>
