@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { globalVars } from "../../constants/globalvars";
 import { colors } from "../../constants/colors";
+import { gutters } from "../../constants/gutters";
 import styled from "styled-components";
 import StyledButton from "../buttons/Button.styled";
 import StarRatingShow from "../starratingshow/StarRatingShow.styled";
@@ -9,8 +10,8 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0;
-  padding: 2%;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.mainGutter};
   background-color: ${colors.white};
   color: ${colors.secondary};
 `;
@@ -19,18 +20,18 @@ const Line = styled.hr`
   height: 1px;
   border: 0;
   border-top: 5px solid ${colors.secondary};
-  margin: 1% 0 0 .5%;
-  padding: 0;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.noGutter};
 `;
 const Header = styled.div`
   font-size: 20px;
   font-weight: bold;
-  margin: 0;
-  padding: 0;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.noGutter};
 `;
 const Image = styled.img`
-  margin: 0;
-  padding: 1%;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.halfGutter};
   object-fit: contain;
   object-position: center;
   &:hover {
@@ -41,8 +42,8 @@ const Text = styled.div`
   color: black;
   font-size: 15px;
   font-weight: bold;
-  margin: 0;
-  padding: 0;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.noGutter};
 `;
 const ReviewArea = styled.div`
   display: flex;
@@ -60,9 +61,9 @@ const PriceArea = styled.div`
   justify-content: start;
 `;
 const SalePrice = styled.div`
-  font-size: 45px;
+  font-size: 50px;
   font-weight: bold;
-  margin-right: 2%;
+  margin-right: ${gutters.halfGutter};
 `;
 const RegPrice = styled.div`
   color: ${colors.grey};
@@ -78,12 +79,14 @@ const ButtonArea = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 0;
-  padding: 0;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.noGutter};
 `;
 const ShopAllText = styled.div`
   color: black;
   font-weight: bold;
+  margin: ${gutters.noGutter};
+  margin-left: ${gutters.quarterGutter};
 `;
 
 function StyledHottestDeal() {
@@ -137,10 +140,10 @@ function StyledHottestDeal() {
           </ReviewText>
         </ReviewArea>
         <PriceArea>
-          <SalePrice>${hotDeal.salePrice}</SalePrice>
+          <SalePrice>&#36;{hotDeal.salePrice}</SalePrice>
           <RegPrice>
-            <SaveAmt>save ${savePrice}</SaveAmt>
-            was ${hotDeal.regularPrice}
+            <SaveAmt>save &#36;{savePrice}</SaveAmt>
+            was &#36;{hotDeal.regularPrice}
           </RegPrice>
         </PriceArea>
         <ButtonArea>

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../../constants/colors";
+import { gutters } from "../../constants/gutters";
 import imageSrc from "../../assets/movie_theme.png";
 import imageTV from "../../assets/curved_tv.png";
 import StyledButton from "../buttons/Button.styled";
@@ -13,14 +14,14 @@ const Main = styled.div`
   flex-direction: column;
   justify-content: center;
   align-content: center;
+  margin-top: ${gutters.halfGutter};
+  margin-bottom: ${gutters.halfGutter};
 `;
 const HeroImage = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-content: center;
-  margin-top: 2%;
-  margin-bottom: 2%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(${imageSrc});
   background-position: center;
@@ -36,14 +37,14 @@ const ButtonArea = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  margin: 0%;
-  padding: 0;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.noGutter};
 `;
 const Text = styled.p`
-  font-size: ${props => props.size};
+  font-size: ${(props) => props.size};
   font-weight: bold;
-  margin: 0;
-  padding: 0;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.noGutter};
 `;
 const Image = styled.img`
   width: 325px;
@@ -55,14 +56,15 @@ const IconSection = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   align-content: center;
-  margin: .5%;
+  margin: ${gutters.halfGutter} ${gutters.mainGutter};
+  margin-bottom: ${gutters.noGutter};
 `;
 const IconTextSection = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  margin: 0;
-  padding: .5%;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.noGutter};
   width: 210px;
   color: ${colors.grey};
 `;
@@ -70,8 +72,8 @@ const IconText = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  margin: 0;
-  padding: 0;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.noGutter};
 `;
 
 function StyledHeroImage() {

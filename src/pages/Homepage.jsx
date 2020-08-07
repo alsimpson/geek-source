@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { globalVars } from "../constants/globalvars";
+import { gutters } from "../constants/gutters";
 import styled from "styled-components";
 import StyledHeader from "../components/header/Header.styled";
 import StyledHeroImage from "../components/heroimage/HeroImage.styled";
@@ -12,8 +13,8 @@ const HotDealArea = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 5% auto;
-  padding: 0;
+  margin: ${gutters.halfGutter};
+  padding: ${gutters.noGutter};
 `;
 
 function Homepage() {
@@ -45,8 +46,6 @@ function Homepage() {
         setError(e);
     }
   }
-
-  /* TODO refactor IconArea components to single component */
 
   if (error) {
     return <div>Error: {error.message}</div>;

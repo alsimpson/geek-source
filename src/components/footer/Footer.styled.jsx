@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../../constants/colors";
+import { gutters } from "../../constants/gutters";
 import StyledShopList from "./ShopList.styled";
 import StyledQuickLinks from "./QuickLinks.styled";
 import StyledSearch from "../search/Search.styled";
@@ -14,7 +15,7 @@ import CcApplePay from "../icons/CcApplePayIcon";
 const Main = styled.footer`
   display: flex;
   flex-direction: column;
-  margin: 5% 5% 0 5%;
+  margin: ${gutters.halfGutter} ${gutters.mainGutter};
   background-color: ${colors.primaryDark};
   color: ${colors.grey};
 `;

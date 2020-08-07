@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../../constants/colors";
+import { gutters } from "../../constants/gutters";
 import logo from "../../assets/logo.png";
 import StyledDropDownList from "../buttons/DropDownList.styled";
 import StyledSearch from "../search/Search.styled";
@@ -9,27 +10,27 @@ import StyledItemsInCart from "../itemsincart/ItemsInCart.styled";
 const Main = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0.5% 5% 0 5%;
+  margin: ${gutters.halfGutter} ${gutters.mainGutter};
 `;
 const HeaderTop = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 0;
-  padding: 0;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.noGutter};
   background-color: ${colors.white};
   color: ${colors.secondary};
 `;
 const HeaderLogo = styled.img`
   height: 40px;
   width: 70px;
-  margin-left: 1%;
-  padding: 0;
+  margin-left: ${gutters.halfGutter};
+  padding: ${gutters.noGutter};
 `;
 const Cart = styled.div`
-  margin-right: 1%;
-  margin-left: 30%;
+  margin-right: ${gutters.halfGutter};
+  margin-left: ${gutters.doubleGutter};
 `;
 const HeaderNav = styled.div`
   display: flex;

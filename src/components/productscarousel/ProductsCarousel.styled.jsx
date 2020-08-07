@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { globalVars } from "../../constants/globalvars";
 import { colors } from "../../constants/colors";
+import { gutters } from "../../constants/gutters";
 import styled from "styled-components";
 import StarRatingShow from "../starratingshow/StarRatingShow.styled";
 import ShoppingCartAddIcon from "../icons/ShoppingCartAddIcon";
@@ -10,47 +11,48 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  margin: 0 5% 0 5%;
-  padding: 1%;
+  margin: ${gutters.noGutter} ${gutters.mainGutter};
+  padding: ${gutters.halfGutter} ${gutters.noGutter};
 `;
 const Line = styled.hr`
   width: 50px;
   height: 1px;
   border: 0;
   border-top: 5px solid ${colors.secondary};
-  margin: 0;
-  padding: 0;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.noGutter};
 `;
 const Header = styled.div`
   font-size: 15px;
   font-weight: bold;
   color: ${colors.white};
-  margin: 0;
-  padding: 0;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.noGutter};
 `;
 const CarouselArea = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: start;
   overflow: hidden;
-  margin: 1% 0 0 0;
-  padding: 0;
+  margin: ${gutters.noGutter};
+  margin-top: ${gutters.quarterGutter};
+  padding: ${gutters.noGutter};
   background-color: ${colors.white};
 `;
 const ProductCard = styled.div`
   display: ${(props) => props.display};
   flex-direction: column;
   justify-content: center;
-  margin: 0.5%;
-  padding: 0.5%;
+  margin: ${gutters.quarterGutter};
+  padding: ${gutters.quarterGutter};
   max-width: 200px;
   min-width: 200px;
   max-height: 250px;
   min-height: 250px;
 `;
 const Image = styled.img`
-  margin: 0;
-  padding: 0.5%;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.quarterGutter};
   object-fit: contain;
   object-position: left top;
   &:hover {
@@ -61,8 +63,8 @@ const Text = styled.div`
   color: black;
   font-size: 12px;
   font-weight: bold;
-  margin: 1% 0;
-  padding: 0;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.noGutter};
 `;
 const ReviewArea = styled.div`
   display: flex;
@@ -72,7 +74,8 @@ const ReviewArea = styled.div`
 const ReviewText = styled.div`
   font-size: 12px;
   font-weight: bold;
-  margin: 1% 0 0 2%;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.quarterGutter};
 `;
 const PriceArea = styled.div`
   display: flex;
@@ -83,25 +86,18 @@ const PriceArea = styled.div`
 const SalePrice = styled.div`
   font-size: 12px;
   font-weight: bold;
-  margin-right: 2%;
+  margin: ${gutters.noGutter};
+  margin-right: ${gutters.quarterGutter};
 `;
 const NavArea = styled.div`
   display: flex;
   flex-direction: row-reverse;
   background-color: ${colors.white};
 `;
-const RightArrow = styled.div`
+const Arrow = styled.div`
   color: red;
-  margin: 0 1% 0 0;
-  padding: 0 .5% 0 .5%;
-  &:hover {
-    cursor: pointer
-  };
-`;
-const LeftArrow = styled.div`
-  color: red;
-  margin: 0;
-  padding: 0 .5% 0 .5%;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.noGutter} ${gutters.quarterGutter};
   &:hover {
     cursor: pointer;
   }
@@ -181,7 +177,9 @@ function StyledProductsCarousel(props) {
         <CarouselArea>
           {products.map((p, index) => (
             <ProductCard
-              key={index} display={setInvisible(index) ? "none" : "flex"}>
+              key={index}
+              display={setInvisible(index) ? "none" : "flex"}
+            >
               <Image src={p.mediumImage} alt='product' />
               <Text>{p.name}</Text>
               <ReviewArea>
@@ -191,19 +189,19 @@ function StyledProductsCarousel(props) {
                 </ReviewText>
               </ReviewArea>
               <PriceArea>
-                <SalePrice>${p.salePrice}</SalePrice>
+                <SalePrice>&#36;{p.salePrice}</SalePrice>
                 <ShoppingCartAddIcon />
               </PriceArea>
             </ProductCard>
           ))}
         </CarouselArea>
         <NavArea>
-          <RightArrow onClick={() => onRightArrowClick(currIndex)}>
+          <Arrow onClick={() => onRightArrowClick(currIndex)}>
             <ArrowIcon direction='right' />
-          </RightArrow>
-          <LeftArrow onClick={() => onLeftArrowClick(currIndex)}>
+          </Arrow>
+          <Arrow onClick={() => onLeftArrowClick(currIndex)}>
             <ArrowIcon direction='left' />
-          </LeftArrow>
+          </Arrow>
         </NavArea>
       </Main>
     );
