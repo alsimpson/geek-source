@@ -96,7 +96,7 @@ const PriceArea = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  max-width: 450px;
+  align-items: center;
 `;
 const SalePrice = styled.div`
   display: flex;
@@ -204,7 +204,7 @@ function CategoryPage(props) {
                     <Text size='50px' color={colors.secondary} weight='bold'>
                       $ {p.salePrice}
                     </Text>
-                    { isOnSale(p.regularPrice, p.salePrice) &&
+                    {isOnSale(p.regularPrice, p.salePrice) && (
                       <SaveAmt>
                         <Text size='15px' color='black' weight='bold'>
                           save $ {getSavingsAmt(p.regularPrice, p.salePrice)}
@@ -213,9 +213,9 @@ function CategoryPage(props) {
                           &nbsp; was $ {p.regularPrice}
                         </Text>
                       </SaveAmt>
-                    }
+                    )}
                   </SalePrice>
-                  <StyledButton text="ADD TO CART" />
+                  <StyledButton text='ADD TO CART' />
                 </PriceArea>
               </TextSection>
             </ProductCard>

@@ -67,8 +67,8 @@ function StyledHeroImage() {
             to={{
               pathname: "/category",
               state: {
-                urlSearch: "categoryPath.id=abcat0100000",
-                categoryId: "abcat0100000",
+                urlSearch: "categoryPath.id=abcat0101000",
+                categoryId: "abcat0101000",
               },
             }}
           >
