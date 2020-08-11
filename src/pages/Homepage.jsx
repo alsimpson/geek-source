@@ -52,9 +52,7 @@ function Homepage() {
         />
         <HotDealArea>
           <StyledHottestDeal />
-          <StyledShopByCategory
-            shopCategories={categoryItems}
-          />
+          <StyledShopByCategory shopCategories={categoryItems} />
         </HotDealArea>
         <StyledFooter shopCategories={categoryItems} />
       </>

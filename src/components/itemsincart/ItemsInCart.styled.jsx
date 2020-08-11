@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import ShoppingCartIcon from "../icons/ShoppingCartIcon";
 
+/* TODO add navigation to shopping cart page */
+
 const Main = styled.div`
   display: flex;
   flex-direction: row;

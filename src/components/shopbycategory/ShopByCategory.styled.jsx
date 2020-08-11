@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { colors } from "../../constants/colors";
 
+/* TODO add animation to list: see shop by category requirments for details*/
+
 const Main = styled.div`
   margin: 1% 2% 1% 2%;
   padding: 1%;
@@ -39,12 +41,13 @@ const Line = styled.hr`
 `;
 
 function StyledShopByCategory(props) {
+  const categories = props.shopCategories || [];
   return (
     <Main>
       <Line />
       <ListHeader>Shop by Category</ListHeader>
       <List>
-        {props.shopCategories.map((item) => (
+        {categories.map((item) => (
           <ListItem key={item.id}>
             {item.name}
           </ListItem>

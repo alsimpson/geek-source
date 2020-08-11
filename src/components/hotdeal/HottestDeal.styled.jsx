@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { globalVars } from "../../constants/globalvars";
 import { colors } from "../../constants/colors";
 import { gutters } from "../../constants/gutters";
 import styled from "styled-components";
 import StyledButton from "../buttons/Button.styled";
 import StarRatingShow from "../starratingshow/StarRatingShow.styled";
+
+/* TODO add navigation to product page to buy now button */
+/* TODO add navigation to category page to shop all deals */
 
 const Main = styled.div`
   display: flex;
@@ -87,46 +91,38 @@ const ShopAllText = styled.div`
   font-weight: bold;
   margin: ${gutters.noGutter};
   margin-left: ${gutters.quarterGutter};
+  &:hover {cursor: pointer}
 `;
 
+//--------------------------------------------------------------------
 function StyledHottestDeal() {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [hotDeal, setHotDeal] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!isLoaded) {
-      getHotDeal()  /*TODO refactor based Wes' suggestion */
-    };
-  }, [isLoaded]);
-
-/* TODO move outside to separate service help module */
-  const getHotDeal = async () => {
-    try {
-      const url =
-        "/products((offers.type=deal_of_the_day))?format=json&apiKey=" +
-        globalVars.apiKey;
+    const getHotDeal = async () => {
+      const url = "/products((offers.type=deal_of_the_day))?format=json&apiKey=" +
+                  globalVars.apiKey;
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
-        setIsLoaded(true);
         setHotDeal(data.products[0]);
       } else {
-        setIsLoaded(true);
         setError(response.error);
       }
-    } catch (e) {
-      setIsLoaded(true);
-      setError(e);
-    }
+    };
+    getHotDeal()
+  }, []);
+
+  const getSavingsAmt = (amt1, amt2) => {
+    return Number.parseFloat(amt1 - amt2).toFixed(2);
   };
 
+  //-----------------------------------------------------------------------
   if (error) {
     return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div>Loading...</div>;
   } else {
-    const savePrice = Number.parseFloat((hotDeal.regularPrice - hotDeal.salePrice)).toFixed(2);
+    //const savePrice = Number.parseFloat((hotDeal.regularPrice - hotDeal.salePrice)).toFixed(2);
     return (
       <Main>
         <Line />
@@ -140,15 +136,28 @@ function StyledHottestDeal() {
           </ReviewText>
         </ReviewArea>
         <PriceArea>
-          <SalePrice>&#36;{hotDeal.salePrice}</SalePrice>
+          <SalePrice>$ {hotDeal.salePrice}</SalePrice>
           <RegPrice>
-            <SaveAmt>save &#36;{savePrice}</SaveAmt>
-            was &#36;{hotDeal.regularPrice}
+            <SaveAmt>
+              save $
+              {getSavingsAmt(hotDeal.regularPrice,hotDeal.salePrice)}
+            </SaveAmt>
+            was $ {hotDeal.regularPrice}
           </RegPrice>
         </PriceArea>
         <ButtonArea>
           <StyledButton text='BUY NOW' />
-          <ShopAllText>shop all deals</ShopAllText>
+          <Link
+            to={{
+              pathname: "/category",
+              state: {
+                urlSearch: "offers.type=deal_of_the_day",
+                categoryId: "Hottest Deals",
+              },
+            }}
+          >
+            <ShopAllText>shop all deals</ShopAllText>
+          </Link>
         </ButtonArea>
       </Main>
     );

@@ -47,6 +47,7 @@ const ListItem = styled("li")`
 `;
 
 function StyledDropDown(props) {
+  const list = props.list || [];
   const [isOpen, setIsOpen] = useState(false);
 //  const [selectedOption, setSelectedOption] = useState(null);
 
@@ -66,7 +67,7 @@ function StyledDropDown(props) {
         </DropDownHeader>
         {isOpen && (
           <DropDownList>
-            {props.list.map((item) => (
+            {list.map((item) => (
               <ListItem onClick={onOptionClicked(item.url)} key={item.id}>
                 {item.name}
               </ListItem>

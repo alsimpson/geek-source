@@ -25,11 +25,12 @@ const ListItem = styled.li`
 `;
 
 function StyledShopList(props) {
+  const list = props.list || [];
   return (
     <Main>
       <ListHeader>SHOP</ListHeader>
       <List>
-        {props.list.map((item) => (
+        {list.map((item) => (
           <ListItem key={item.id}>{item.name}</ListItem>
         ))}
       </List>

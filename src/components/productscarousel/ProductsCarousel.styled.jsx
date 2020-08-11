@@ -7,6 +7,10 @@ import StarRatingShow from "../starratingshow/StarRatingShow.styled";
 import ShoppingCartAddIcon from "../icons/ShoppingCartAddIcon";
 import ArrowIcon from "../icons/ArrowIcon";
 
+/* TODO add disable function for left/right arrows when end of list */
+/* TODO reduce fields in API call */
+/* TODO add navigation to product page when any part of product card clicked*/
+
 const Main = styled.div`
   display: flex;
   flex-direction: column;

@@ -1,13 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { colors } from "../../constants/colors";
 import { gutters } from "../../constants/gutters";
 import imageSrc from "../../assets/movie_theme.png";
 import imageTV from "../../assets/curved_tv.png";
 import StyledButton from "../buttons/Button.styled";
-import ShippingFastIcon from "../icons/ShippingFastIcon";
-import CreditCardIcon from "../icons/CreditCardIcon";
-import HeadsetIcon from "../icons/HeadsetIcon";
+import StyledTriadIcons from "../triadicons/TriadIcons.styled";
+
+/* TODO add API call to shop now button for "curved tv" category*/
+/* TODO add style attribute to only show on desktop */
 
 const Main = styled.div`
   display: flex;
@@ -51,30 +53,6 @@ const Image = styled.img`
   height: 200px;
   align-self: center;
 `;
-const IconSection = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-content: center;
-  margin: ${gutters.halfGutter} ${gutters.mainGutter};
-  margin-bottom: ${gutters.noGutter};
-`;
-const IconTextSection = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  margin: ${gutters.noGutter};
-  padding: ${gutters.noGutter};
-  width: 210px;
-  color: ${colors.grey};
-`;
-const IconText = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  margin: ${gutters.noGutter};
-  padding: ${gutters.noGutter};
-`;
 
 function StyledHeroImage() {
   return (
@@ -85,33 +63,21 @@ function StyledHeroImage() {
           <Text size='12px'>
             Experience the action and drama like never before.
           </Text>
-          <StyledButton text='SHOP NOW' />
+          <Link
+            to={{
+              pathname: "/category",
+              state: {
+                urlSearch: "categoryPath.id=abcat0100000",
+                categoryId: "abcat0100000",
+              },
+            }}
+          >
+            <StyledButton text='SHOP NOW' />
+          </Link>
         </ButtonArea>
         <Image src={imageTV} alt='smart tv' />
       </HeroImage>
-      <IconSection>
-        <IconTextSection>
-          <ShippingFastIcon />
-          <IconText>
-            <Text size='1.2rem'>FREE SHIPPING</Text>
-            <Text size='0.8rem'>on every order</Text>
-          </IconText>
-        </IconTextSection>
-        <IconTextSection>
-          <CreditCardIcon />
-          <IconText>
-            <Text size='1.2rem'>0% Financing</Text>
-            <Text size='0.8rem'>on select products</Text>
-          </IconText>
-        </IconTextSection>
-        <IconTextSection>
-          <HeadsetIcon />
-          <IconText>
-            <Text size='1.2rem'>Free Tech Support</Text>
-            <Text size='0.8rem'>on all products</Text>
-          </IconText>
-        </IconTextSection>
-      </IconSection>
+      <StyledTriadIcons />
     </Main>
   );
 }

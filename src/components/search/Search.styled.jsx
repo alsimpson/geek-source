@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import SearchIcon from "../icons/SearchIcon";
 
+/* TODO add API call for products search & on ENTER navigate to Category page */
+
 const Main = styled("div")`
   border-top: none;
   border-right: none;

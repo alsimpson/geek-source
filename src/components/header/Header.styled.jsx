@@ -7,6 +7,8 @@ import StyledDropDownList from "../buttons/DropDownList.styled";
 import StyledSearch from "../search/Search.styled";
 import StyledItemsInCart from "../itemsincart/ItemsInCart.styled";
 
+/* TODO add homepage navigation to logo when clicked */
+
 const Main = styled.div`
   display: flex;
   flex-direction: column;
