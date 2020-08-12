@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { globalVars } from "../constants/globalvars";
-import { gutters } from "../constants/gutters";
-import styled from "styled-components";
-import StyledHeader from "../components/header/Header.styled";
-import StyledHeroImage from "../components/heroimage/HeroImage.styled";
-import StyledProductsCarousel from "../components/productscarousel/ProductsCarousel.styled";
-import StyledHottestDeal from "../components/hotdeal/HottestDeal.styled";
-import StyledShopByCategory from "../components/shopbycategory/ShopByCategory.styled";
-import StyledFooter from "../components/footer/Footer.styled";
-
-const HotDealArea = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: ${gutters.halfGutter};
-  padding: ${gutters.noGutter};
-`;
+import { StyledHotDealArea } from "./Homepage.styled";
+import Header from "../components/Header/Header";
+import HeroImage from "../components/HeroImage/HeroImage";
+import ProductsCarousel from "../components/ProductsCarousel/ProductsCarousel";
+import HottestDeal from "../components/HottestDeal/HottestDeal";
+import ShopByCategory from "../components/ShopByCategory/ShopByCategory";
+import Footer from "../components/Footer/Footer";
 
 function Homepage() {
+
   const [categoryItems, setCategoryItems] = useState([]);
   const [error, setError] = useState(null);
 
@@ -40,21 +32,21 @@ function Homepage() {
   } else {
     return (
       <>
-        <StyledHeader products={categoryItems} />
-        <StyledHeroImage />
-        <StyledProductsCarousel
+        <Header products={categoryItems} />
+        <HeroImage />
+        <ProductsCarousel
           header='Featured Products'
           type='special_offer'
         />
-        <StyledProductsCarousel
+        <ProductsCarousel
           header="Today's Deals"
           type='digital_insert'
         />
-        <HotDealArea>
-          <StyledHottestDeal />
-          <StyledShopByCategory shopCategories={categoryItems} />
-        </HotDealArea>
-        <StyledFooter shopCategories={categoryItems} />
+        <StyledHotDealArea>
+          <HottestDeal />
+          <ShopByCategory shopCategories={categoryItems} />
+        </StyledHotDealArea>
+        <Footer shopCategories={categoryItems} />
       </>
     );
   }

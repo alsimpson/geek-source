@@ -1,114 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { globalVars } from "../constants/globalvars";
-import { gutters } from "../constants/gutters";
 import { colors } from "../constants/colors";
-import styled from "styled-components";
-import StyledHeader from "../components/header/Header.styled";
-import StyledShopByCategory from "../components/shopbycategory/ShopByCategory.styled";
-import StyledTriadIcons from "../components/triadicons/TriadIcons.styled";
-import StyledFooter from "../components/footer/Footer.styled";
-import StarRatingShow from "../components/starratingshow/StarRatingShow.styled";
-import StyledButton from "../components/buttons/Button.styled";
-
-const CategorySection = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: ${gutters.halfGutter};
-  padding: ${gutters.noGutter};
-`;
-const CategoryList = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  margin: ${gutters.noGutter};
-  padding: ${gutters.mainGutter};
-  background-color: ${colors.white};
-  color: ${colors.secondary};
-`;
-const Line = styled.hr`
-  width: 50px;
-  height: 1px;
-  border: 0;
-  border-top: 5px solid ${colors.secondary};
-  margin: ${gutters.noGutter};
-  padding: ${gutters.noGutter};
-`;
-const Header = styled.div`
-  font-size: 20px;
-  font-weight: bold;
-  margin: ${gutters.noGutter};
-  padding: ${gutters.noGutter};
-`;
-const ProductCard = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  margin: ${gutters.noGutter};
-  padding: ${gutters.noGutter};
-  padding-top: ${gutters.quarterGutter};
-  max-width: 600px;
-  min-width: 600px;
-  border-top: 1px solid ${colors.grey};
-`;
-const Image = styled.img`
-  margin: ${gutters.noGutter};
-  padding: ${gutters.quarterGutter};
-  object-fit: contain;
-  object-position: left top;
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-const TextSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: ${gutters.noGutter};
-  margin-left: ${gutters.quarterGutter};
-  padding: ${gutters.noGutter};
-`;
-const Text = styled.div`
-  color: ${props => props.color};
-  font-size: ${props => props.size};
-  font-weight: ${props => props.weight};
-  margin: ${gutters.noGutter};
-  padding: ${gutters.noGutter};
-`;
-const ReviewArea = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  color: ${colors.secondary};
-  margin: ${gutters.noGutter};
-  margin-top: ${gutters.quarterGutter};
-  padding: ${gutters.noGutter};
-`;
-const ReviewText = styled.div`
-  font-size: 12px;
-  font-weight: bold;
-  margin: ${gutters.noGutter};
-  margin-left: ${gutters.quarterGutter};
-  padding: ${gutters.noGutter};
-`;
-const PriceArea = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-const SalePrice = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  margin: ${gutters.noGutter};
-  padding: ${gutters.noGutter};
-`;
-const SaveAmt = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
+import { StyledHeader, StyledHeaderText, StyledLine, StyledImage, StyledTextSection,
+         StyledText, StyledCategorySection, StyledCategoryListSection, StyledCategoryList,
+         StyledProductCard, StyledReviewArea, StyledReviewText,
+         StyledPriceArea, StyledSalePrice, StyledSaveAmt } from "./CategoryPage.styled";
+import Header from "../components/Header/Header";
+import ShopByCategory from "../components/ShopByCategory/ShopByCategory";
+import TriadIcons from "../components/TriadIcons/TriadIcons";
+import Footer from "../components/Footer/Footer";
+import StarRatingShow from "../components/StarRatingShow/StarRatingShow";
+import Button from "../components/Buttons/Button";
 
 // --------------------------------------------------------------------
 function CategoryPage(props) {
@@ -151,7 +53,7 @@ function CategoryPage(props) {
     getProducts(urlSearch);
   },[urlSearch, categoryId]);
 
-  /* get category name from products */
+  /* function: get category name from products */
   const getCategoryName = (p, id) => {
     let categories = [];
     let name = id;
@@ -166,9 +68,11 @@ function CategoryPage(props) {
     return name;
   };
 
+  /* function: deterime if item is on sale */
   const isOnSale = (amt1, amt2) => {
     if (amt1 > amt2) { return true } else {return false};
   };
+  /* function: calculate savings amount */
   const getSavingsAmt = (amt1, amt2) => {
     return Number.parseFloat((amt1 - amt2)).toFixed(2);
   };
@@ -176,54 +80,62 @@ function CategoryPage(props) {
   //---------------------------------------------------------------------
   return (
     <>
-      <StyledHeader products={categoryItems} />
-      <CategorySection>
-        <StyledShopByCategory shopCategories={categoryItems} />
-        <CategoryList>
+      <Header products={categoryItems} />
+      <StyledCategorySection>
+        <ShopByCategory shopCategories={categoryItems} />
+        <StyledCategoryListSection>
           {error && <div>Something went wrong:{error.message}</div>}
-          <Line />
-          <Header>{categoryName}</Header>
-          {products.map((p, index) => (
-            <ProductCard key={index}>
-              <Image src={p.mediumImage} alt='product' />
-              <TextSection>
-                <Text size='18px' color='black' weight='bold'>
-                  {p.name}
-                </Text>
-                <Text size='12px' color='black' weight='bold'>
-                  Model:{p.modelNumber} &nbsp; SKU:{p.sku}
-                </Text>
-                <ReviewArea>
-                  <StarRatingShow Rating={p.customerReviewAverage} />
-                  <ReviewText>
-                    {p.customerReviewAverage}({p.customerReviewCount})
-                  </ReviewText>
-                </ReviewArea>
-                <PriceArea>
-                  <SalePrice>
-                    <Text size='50px' color={colors.secondary} weight='bold'>
-                      $ {p.salePrice}
-                    </Text>
-                    {isOnSale(p.regularPrice, p.salePrice) && (
-                      <SaveAmt>
-                        <Text size='15px' color='black' weight='bold'>
-                          save $ {getSavingsAmt(p.regularPrice, p.salePrice)}
-                        </Text>
-                        <Text color={colors.grey}>
-                          &nbsp; was $ {p.regularPrice}
-                        </Text>
-                      </SaveAmt>
-                    )}
-                  </SalePrice>
-                  <StyledButton text='ADD TO CART' />
-                </PriceArea>
-              </TextSection>
-            </ProductCard>
-          ))}
-        </CategoryList>
-      </CategorySection>
-      <StyledTriadIcons />
-      <StyledFooter shopCategories={categoryItems} />
+          <StyledHeader>
+            <StyledLine />
+            <StyledHeaderText>{categoryName}</StyledHeaderText>
+          </StyledHeader>
+          <StyledCategoryList>
+            {products.map((p, index) => (
+              <StyledProductCard key={index}>
+                <StyledImage src={p.mediumImage} alt='product' />
+                <StyledTextSection>
+                  <StyledText size='18px' color='black' weight='bold'>
+                    {p.name}
+                  </StyledText>
+                  <StyledText size='12px' color='black' weight='bold'>
+                    Model:{p.modelNumber} &nbsp; SKU:{p.sku}
+                  </StyledText>
+                  <StyledReviewArea>
+                    <StarRatingShow Rating={p.customerReviewAverage} />
+                    <StyledReviewText>
+                      {p.customerReviewAverage}({p.customerReviewCount})
+                    </StyledReviewText>
+                  </StyledReviewArea>
+                  <StyledPriceArea>
+                    <StyledSalePrice>
+                      <StyledText
+                        size='50px'
+                        color={colors.secondary}
+                        weight='bold'
+                      >
+                        $ {p.salePrice}
+                      </StyledText>
+                      {isOnSale(p.regularPrice, p.salePrice) && (
+                        <StyledSaveAmt>
+                          <StyledText size='15px' color='black' weight='bold'>
+                            save $ {getSavingsAmt(p.regularPrice, p.salePrice)}
+                          </StyledText>
+                          <StyledText color={colors.grey}>
+                            &nbsp; was $ {p.regularPrice}
+                          </StyledText>
+                        </StyledSaveAmt>
+                      )}
+                    </StyledSalePrice>
+                    <Button text='ADD TO CART' />
+                  </StyledPriceArea>
+                </StyledTextSection>
+              </StyledProductCard>
+            ))}
+          </StyledCategoryList>
+        </StyledCategoryListSection>
+      </StyledCategorySection>
+      <TriadIcons />
+      <Footer shopCategories={categoryItems} />
     </>
   );
 }
