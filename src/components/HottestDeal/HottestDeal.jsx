@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { globalVars } from "../../constants/globalvars";
 import { StyledMain, StyledLine, StyledHeader, StyledProductCard, StyledImage,
-         StyledText, StyledReviewArea, StyledReviewText, StyledPriceArea,
-         StyledSalePrice, StyledRegPrice, StyledSaveAmt, StyledButtonArea,
+         StyledText, StyledReviewArea, StyledPriceArea, StyledSalePrice,
+         StyledRegPrice, StyledSaveAmt, StyledButtonArea,
          StyledShopAllText } from "./HottestDeal.styled";
 import Button from "../Buttons/Button";
 import StarRatingShow from "../StarRatingShow/StarRatingShow";
@@ -47,10 +47,10 @@ function HottestDeal() {
           <StyledImage src={hotDeal.largeImage} alt='hottest deal' />
           <StyledText>{hotDeal.name}</StyledText>
           <StyledReviewArea>
-            <StarRatingShow Rating={hotDeal.customerReviewAverage} />
-            <StyledReviewText>
-              {hotDeal.customerReviewAverage}({hotDeal.customerReviewCount})
-            </StyledReviewText>
+            <StarRatingShow
+              Rating={hotDeal.customerReviewAverage}
+              Count={hotDeal.customerReviewCount}
+            />
           </StyledReviewArea>
           <StyledPriceArea>
             <StyledSalePrice>$ {hotDeal.salePrice}</StyledSalePrice>

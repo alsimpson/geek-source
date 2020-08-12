@@ -60,14 +60,6 @@ export const StyledReviewArea = styled.div`
   flex-direction: row;
 `;
 
-export const StyledReviewText = styled.div`
-  color: ${colors.secondary};
-  font-size: 12px;
-  font-weight: bold;
-  margin: ${gutters.noGutter};
-  margin-left: ${gutters.quarterGutter};
-`;
-
 export const StyledPriceArea = styled.div`
   display: flex;
   flex-direction: row;

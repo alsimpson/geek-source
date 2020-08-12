@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { globalVars } from "../../constants/globalvars";
 import { StyledMain, StyledLine, StyledHeader, StyledCarouselArea,
          StyledProductCard, StyledImage, StyledText, StyledReviewArea,
-         StyledReviewText, StyledPriceArea, StyledSalePrice, StyledNavArea,
+         StyledPriceArea, StyledSalePrice, StyledNavArea,
          StyledArrow } from "./ProductsCarousel.styled";
 import StarRatingShow from "../StarRatingShow/StarRatingShow";
 import ShoppingCartAddIcon from "../Icons/ShoppingCartAddIcon";
@@ -76,10 +76,10 @@ function ProductsCarousel(props) {
               <StyledImage src={p.mediumImage} alt='product' />
               <StyledText>{p.name}</StyledText>
               <StyledReviewArea>
-                <StarRatingShow Rating={p.customerReviewAverage} />
-                <StyledReviewText>
-                  {p.customerReviewAverage}({p.customerReviewCount})
-                </StyledReviewText>
+                <StarRatingShow
+                  Rating={p.customerReviewAverage}
+                  Count={p.customerReviewCount}
+                />
               </StyledReviewArea>
               <StyledPriceArea>
                 <StyledSalePrice>&#36;{p.salePrice}</StyledSalePrice>

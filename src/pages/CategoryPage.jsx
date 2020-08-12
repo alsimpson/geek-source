@@ -3,8 +3,8 @@ import { globalVars } from "../constants/globalvars";
 import { colors } from "../constants/colors";
 import { StyledHeader, StyledHeaderText, StyledLine, StyledImage, StyledTextSection,
          StyledText, StyledCategorySection, StyledCategoryListSection, StyledCategoryList,
-         StyledProductCard, StyledReviewArea, StyledReviewText,
-         StyledPriceArea, StyledSalePrice, StyledSaveAmt } from "./CategoryPage.styled";
+         StyledProductCard, StyledReviewArea, StyledPriceArea, StyledSalePrice,
+         StyledSaveAmt } from "./CategoryPage.styled";
 import Header from "../components/Header/Header";
 import ShopByCategory from "../components/ShopByCategory/ShopByCategory";
 import TriadIcons from "../components/TriadIcons/TriadIcons";
@@ -101,10 +101,10 @@ function CategoryPage(props) {
                     Model:{p.modelNumber} &nbsp; SKU:{p.sku}
                   </StyledText>
                   <StyledReviewArea>
-                    <StarRatingShow Rating={p.customerReviewAverage} />
-                    <StyledReviewText>
-                      {p.customerReviewAverage}({p.customerReviewCount})
-                    </StyledReviewText>
+                    <StarRatingShow
+                      Rating={p.customerReviewAverage}
+                      Count={p.customerReviewCount}
+                    />
                   </StyledReviewArea>
                   <StyledPriceArea>
                     <StyledSalePrice>

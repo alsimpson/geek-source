@@ -5,6 +5,7 @@ const mainGutter = gutter + unit;
 const halfGutter = (gutter / 2) + unit;
 const oneThirdGutter = (gutter / 3) + unit;
 const quarterGutter = (gutter * 0.25) + unit;
+const oneEighthGutter = (gutter * 0.125) + unit;
 const doubleGutter = (gutter * 2) + unit;
 
 const mobileGutter = 20;
@@ -19,6 +20,7 @@ export const gutters = {
   halfGutter,
   oneThirdGutter,
   quarterGutter,
+  oneEighthGutter,
   doubleGutter,
   mainMobileGutter,
   mobileHalfGutter,

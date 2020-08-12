@@ -100,14 +100,6 @@ export const StyledReviewArea = styled.div`
   padding: ${gutters.noGutter};
 `;
 
-export const StyledReviewText = styled.div`
-  font-size: 12px;
-  font-weight: bold;
-  margin: ${gutters.noGutter};
-  margin-left: ${gutters.quarterGutter};
-  padding: ${gutters.noGutter};
-`;
-
 export const StyledPriceArea = styled.div`
   display: flex;
   flex-direction: row;

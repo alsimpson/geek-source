@@ -66,12 +66,6 @@ export const StyledReviewArea = styled.div`
   flex-direction: row;
   color: ${colors.secondary};
 `;
-export const StyledReviewText = styled.div`
-  font-size: 12px;
-  font-weight: bold;
-  margin: ${gutters.noGutter};
-  padding: ${gutters.quarterGutter};
-`;
 export const StyledPriceArea = styled.div`
   display: flex;
   flex-direction: row;
