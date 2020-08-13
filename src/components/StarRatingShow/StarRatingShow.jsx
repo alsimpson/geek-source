@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import { StyledMain, StyledStars, StyledText } from "./StarRatingShow.styled";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,10 +21,10 @@ function getStars(value) {
 };
 
 /* function: generate rating text */
-function setReviewText(str1, str2) {
+function setReviewText(value1, value2) {
   let text = null;
-  if (str2) {
-    text = str1 + '(' + str2 + ')'
+  if (value2) {
+    text = value1 + ' (' + value2 + ')'
   }
   return text;
 };
@@ -41,5 +42,15 @@ function StarRatingShow({Rating, Count}) {
     </StyledMain>
   );
 }
+
+StarRatingShow.propTypes = {
+  Rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  Count: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
+
+StarRatingShow.defaultProps = {
+  Rating: null,
+  Count: null
+};
 
 export default StarRatingShow;

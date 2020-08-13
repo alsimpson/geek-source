@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { colors } from "../../constants/colors";
 import { StyledMain,
          StyledFooterTop,
@@ -21,15 +22,15 @@ import CcAmexIcon from "../Icons/CcAmexIcon";
 import CcApplePay from "../Icons/CcApplePayIcon";
 
 
-function Footer(props) {
+function Footer({ shopCategories, itemsInCart }) {
   return (
     <StyledMain>
       <StyledFooterTop>
-        <ShopList list={props.shopCategories} />
+        <ShopList list={shopCategories} />
         <QuickLinks />
         <Search />
         <StyledCartArea>
-          <ItemsInCart items='0' color={colors.grey} />
+          <ItemsInCart items={itemsInCart} color={colors.grey} />
           <StyledPayIcons>
             <StyledCcIcon>
               <CcVisaIcon />
@@ -59,5 +60,15 @@ function Footer(props) {
     </StyledMain>
   );
 }
+
+Footer.propTypes = {
+  shopCategories: PropTypes.array,
+  itemsInCart: PropTypes.number
+};
+
+Footer.defaultProps = {
+  shopCategories: [],
+  itemsInCart: 0
+};
 
 export default Footer;

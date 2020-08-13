@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import ArrowIcon from "../Icons/ArrowIcon";
 import { StyledMain,
          StyledDropDownContainer,
@@ -8,8 +9,7 @@ import { StyledMain,
          StyledListItem,
         } from "./DropDownList.styled";
 
-function DropDownList(props) {
-  const list = props.list || [];
+function DropDownList({title, list}) {
   const [isOpen, setIsOpen] = useState(false);
 //  const [selectedOption, setSelectedOption] = useState(null);
 
@@ -24,7 +24,7 @@ function DropDownList(props) {
     <StyledMain>
       <StyledDropDownContainer>
         <StyledDropDownHeader onClick={toggling}>
-          <StyledDropDownHeaderTitle>{props.title}</StyledDropDownHeaderTitle>
+          <StyledDropDownHeaderTitle>{title}</StyledDropDownHeaderTitle>
           {isOpen ? <ArrowIcon direction='up' /> : <ArrowIcon direction='down' />}
         </StyledDropDownHeader>
         {isOpen && (
@@ -40,5 +40,15 @@ function DropDownList(props) {
     </StyledMain>
   );
 }
+
+DropDownList.propTypes = {
+  title: PropTypes.string,
+  list: PropTypes.array
+};
+
+DropDownList.defaultProps = {
+  title: "Text Here",
+  list: [ {id: 0, name: "No items ..."} ]
+};
 
 export default DropDownList;

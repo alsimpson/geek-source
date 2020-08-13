@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { colors } from "../../constants/colors";
 import logo from "../../assets/logo.png";
 import { StyledMain,
@@ -13,10 +14,8 @@ import ItemsInCart from "../ItemsInCart/ItemsInCart";
 
 /* TODO add homepage navigation to logo when clicked */
 /* TODO build component for recently viewed & saved items*/
-const recentlyViewed = [];
-const savedItems = [];
 
-function Header(props) {
+function Header({products}) {
     return (
         <StyledMain>
           <StyledHeaderTop>
@@ -27,12 +26,20 @@ function Header(props) {
             </StyledCart>
           </StyledHeaderTop>
           <StyledHeaderNav>
-            <DropDownList title='PRODUCTS' list={props.products} />
-            <DropDownList title='RECENTLY VIEWED' list={recentlyViewed} />
-            <DropDownList title='SAVED ITEMS' list={savedItems} />
+            <DropDownList title='PRODUCTS' list={products} />
+            <DropDownList title='RECENTLY VIEWED' />
+            <DropDownList title='SAVED ITEMS' />
           </StyledHeaderNav>
         </StyledMain>
     );
   }
+
+Header.propTypes = {
+  products: PropTypes.array
+};
+
+Header.defaultProps = {
+  products: []
+};
 
 export default Header;

@@ -36,11 +36,11 @@ function Homepage() {
         <HeroImage />
         <ProductsCarousel
           header='Featured Products'
-          type='special_offer'
+          query='offers.type=special_offer'
         />
         <ProductsCarousel
           header="Today's Deals"
-          type='digital_insert'
+          query='offers.type=digital_insert'
         />
         <StyledHotDealArea>
           <HottestDeal />

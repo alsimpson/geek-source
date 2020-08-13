@@ -31,6 +31,12 @@ function HottestDeal() {
     getHotDeal()
   }, []);
 
+  /* function: deterime if item is on sale */
+  const isOnSale = (amt1, amt2) => {
+    if (amt1 > amt2) { return true } else {return false};
+  };
+
+  /* function: calculate savings amount */
   const getSavingsAmt = (amt1, amt2) => {
     return Number.parseFloat(amt1 - amt2).toFixed(2);
   };
@@ -54,12 +60,14 @@ function HottestDeal() {
           </StyledReviewArea>
           <StyledPriceArea>
             <StyledSalePrice>$ {hotDeal.salePrice}</StyledSalePrice>
-            <StyledRegPrice>
-              <StyledSaveAmt>
-                save ${getSavingsAmt(hotDeal.regularPrice, hotDeal.salePrice)}
-              </StyledSaveAmt>
-              was $ {hotDeal.regularPrice}
-            </StyledRegPrice>
+            {isOnSale(hotDeal.regularPrice, hotDeal.salePrice) && (
+              <StyledRegPrice>
+                <StyledSaveAmt>
+                  save ${getSavingsAmt(hotDeal.regularPrice, hotDeal.salePrice)}
+                </StyledSaveAmt>
+                was $ {hotDeal.regularPrice}
+              </StyledRegPrice>
+            )}
           </StyledPriceArea>
           <StyledButtonArea>
             <Button text='BUY NOW' />

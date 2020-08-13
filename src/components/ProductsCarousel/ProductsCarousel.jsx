@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { globalVars } from "../../constants/globalvars";
 import { StyledMain, StyledLine, StyledHeader, StyledCarouselArea,
          StyledProductCard, StyledImage, StyledText, StyledReviewArea,
@@ -12,15 +13,15 @@ import ArrowIcon from "../Icons/ArrowIcon";
 /* TODO reduce fields in API call */
 /* TODO add navigation to product page when any part of product card clicked*/
 
-function ProductsCarousel(props) {
+function ProductsCarousel({header, query}) {
   const [error, setError] = useState(null);
   const [products, setProducts] = useState([]);
   const [currIndex, setCurrIndex] = useState(0);
   const [hideIndex, setHideIndex] = useState([]);
 
   useEffect(() => {
-    const getProducts = async (param) => {
-      const url = "/products((offers.type=" + param + "))?format=json&apiKey=" + globalVars.apiKey;
+    const getProducts = async (squery) => {
+      const url = "/products((" + squery + "))?format=json&apiKey=" + globalVars.apiKey;
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
@@ -29,8 +30,8 @@ function ProductsCarousel(props) {
         setError(response.error);
       }
     };
-    getProducts(props.type);
-  }, [props.type]);
+    getProducts(query);
+  }, [query]);
 
   /* Right Arrow Click */
   const onRightArrowClick = (index) => {
@@ -66,7 +67,7 @@ function ProductsCarousel(props) {
     return (
       <StyledMain>
         <StyledLine />
-        <StyledHeader>{props.header}</StyledHeader>
+        <StyledHeader>{header}</StyledHeader>
         <StyledCarouselArea>
           {products.map((p, index) => (
             <StyledProductCard
@@ -100,5 +101,15 @@ function ProductsCarousel(props) {
     );
   }
 }
+
+ProductsCarousel.propTypes = {
+  header: PropTypes.string,
+  query: PropTypes.string
+};
+
+ProductsCarousel.defaultProps = {
+  header: "Text Here",
+  query: null
+};
 
 export default ProductsCarousel;
