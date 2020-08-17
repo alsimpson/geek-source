@@ -5,7 +5,7 @@ import styled from "styled-components";
 export const StyledMain = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: .8;
+  flex-grow: .5;
   justify-content: center;
   margin: ${gutters.noGutter};
   padding: ${gutters.mainGutter};
@@ -66,21 +66,11 @@ export const StyledPriceArea = styled.div`
   justify-content: start;
 `;
 
-export const StyledSalePrice = styled.div`
-  font-size: 50px;
-  font-weight: bold;
-  margin-right: ${gutters.halfGutter};
-`;
-
-export const StyledRegPrice = styled.div`
-  color: ${colors.grey};
-  font-size: 15px;
-`;
-
 export const StyledSaveAmt = styled.div`
-  color: black;
-  font-weight: bold;
-  margin-top: 20%;
+  display: flex;
+  flex-direction: column;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.halfGutter} ${gutters.quarterGutter};
 `;
 
 export const StyledButtonArea = styled.div`

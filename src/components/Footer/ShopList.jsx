@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CategoryContext } from "../../App";
 import {
   StyledMain,
   StyledList,
@@ -6,8 +7,8 @@ import {
   StyledListItem,
 } from "./ShopList.styled";
 
-function ShopList(props) {
-  const list = props.list || [];
+function ShopList() {
+  const list = useContext(CategoryContext);
   return (
     <StyledMain>
       <StyledListHeader>SHOP</StyledListHeader>

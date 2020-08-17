@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { globalVars } from "../constants/globalvars";
+import React from "react";
+import { useGetProduct } from "../hooks/useGetProduct";
+import { getCategoryName } from "../helpers/getCategoryName";
 import { colors } from "../constants/colors";
+import { isOnSale } from "../helpers/isOnSale";
+import { getSavingsAmt } from "../helpers/getSavingsAmt";
 import { StyledHeader, StyledHeaderText, StyledLine, StyledImage, StyledTextSection,
          StyledText, StyledCategorySection, StyledCategoryListSection, StyledCategoryList,
          StyledProductCard, StyledReviewArea, StyledPriceArea, StyledSalePrice,
@@ -11,80 +14,50 @@ import TriadIcons from "../components/TriadIcons/TriadIcons";
 import Footer from "../components/Footer/Footer";
 import StarRatingShow from "../components/StarRatingShow/StarRatingShow";
 import Button from "../components/Buttons/Button";
+import SaleAmount from "../components/Price/SaleAmount";
+
+/*TODO add scrolling to product list & lazy load */
 
 // --------------------------------------------------------------------
 function CategoryPage(props) {
+
+  const query = props.location.state.urlSearch || "(categoryPath.id=cat00000)";
   const categoryId = props.location.state.categoryId || "cat00000";
-  const urlSearch = props.location.state.urlSearch || "categoryPath.id=cat00000";
-  const [categoryName, setCategoryName] = useState("Category Name");
-  const [products, setProducts] = useState([]);
 
-  /*TODO replace category api call with state parameters*/
-  const [categoryItems, setCategoryItems] = useState([]);
-  const [error, setError] = useState(null);
+  const productHook = useGetProduct(query);
+  const error = productHook.error || null;
+  const products = productHook.products || [];
+  const categoryName = getCategoryName(products, categoryId);
 
-  useEffect(() => {
-    const getCategories = async () => {
-      const url = "/categories?format=json&apiKey=" + globalVars.apiKey;
-      const response = await fetch(url);
-      if (response.ok) {
-        const data = await response.json();
-        setCategoryItems(data.categories);
-      } else {
-        setError(response.error);
-      }
-    };
-    getCategories();
-  }, []);
+  //const [categoryName, setCategoryName] = useState("Category Name");
+  //const [products, setProducts] = useState([]);
+  //const [error, setError] = useState(null);
 
   /* get products list for category */
-  useEffect(() => {
-    const getProducts = async (urlSearch) => {
-      const url ="/products((" + urlSearch + "))?format=json&apiKey=" + globalVars.apiKey;
-      const response = await fetch(url);
-      if (response.ok) {
-        const data = await response.json();
-        setProducts(data.products);
-        setCategoryName(getCategoryName(data.products, categoryId));
-      } else {
-        setError(response.error);
-      }
+/*  useEffect(() => {
+    const getProducts = (urlSearch) => {
+      const url ="/products" + urlSearch;
+      fetchData(url).then((response) => {
+        if (response.ok) {
+          setProducts(response.data.products);
+          setCategoryName(getCategoryName(response.data.products, categoryId));
+        } else {
+          setError(response.error);
+        }
+      });
     };
     getProducts(urlSearch);
   },[urlSearch, categoryId]);
-
-  /* function: get category name from products */
-  const getCategoryName = (p, id) => {
-    let categories = [];
-    let name = id;
-    if (p.length > 0) {
-      categories = p[0].categoryPath;
-      for (var i=0;i<categories.length;i++){
-        if (categories[i].id === id) {
-          name = categories[i].name
-        }
-      }
-    }
-    return name;
-  };
-
-  /* function: deterime if item is on sale */
-  const isOnSale = (amt1, amt2) => {
-    if (amt1 > amt2) { return true } else {return false};
-  };
-  /* function: calculate savings amount */
-  const getSavingsAmt = (amt1, amt2) => {
-    return Number.parseFloat((amt1 - amt2)).toFixed(2);
-  };
+*/
 
   //---------------------------------------------------------------------
   return (
     <>
-      <Header products={categoryItems} />
+      <Header />
       <StyledCategorySection>
-        <ShopByCategory shopCategories={categoryItems} />
+        <ShopByCategory />
         <StyledCategoryListSection>
-          {error && <div>Something went wrong:{error.message}</div>}
+          {error && <StyledText>Something went wrong: {error}</StyledText>}
           <StyledHeader>
             <StyledLine />
             <StyledHeaderText>{categoryName}</StyledHeaderText>
@@ -108,21 +81,26 @@ function CategoryPage(props) {
                   </StyledReviewArea>
                   <StyledPriceArea>
                     <StyledSalePrice>
-                      <StyledText
+                      <SaleAmount
+                        amount={p.salePrice}
                         size='50px'
                         color={colors.secondary}
-                        weight='bold'
-                      >
-                        $ {p.salePrice}
-                      </StyledText>
+                      />
                       {isOnSale(p.regularPrice, p.salePrice) && (
                         <StyledSaveAmt>
-                          <StyledText size='15px' color='black' weight='bold'>
-                            save $ {getSavingsAmt(p.regularPrice, p.salePrice)}
-                          </StyledText>
-                          <StyledText color={colors.grey}>
-                            &nbsp; was $ {p.regularPrice}
-                          </StyledText>
+                          <SaleAmount
+                            prefix='save '
+                            amount={getSavingsAmt(p.regularPrice, p.salePrice)}
+                            size='15px'
+                            weight='bold'
+                          />
+                          <SaleAmount
+                            prefix='&nbsp; was '
+                            amount={p.regularPrice}
+                            size='15px'
+                            color={colors.grey}
+                            weight='none'
+                          />
                         </StyledSaveAmt>
                       )}
                     </StyledSalePrice>
@@ -135,7 +113,7 @@ function CategoryPage(props) {
         </StyledCategoryListSection>
       </StyledCategorySection>
       <TriadIcons />
-      <Footer shopCategories={categoryItems} />
+      <Footer />
     </>
   );
 }

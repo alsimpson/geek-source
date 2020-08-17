@@ -1,92 +1,95 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useGetProduct } from "../../hooks/useGetProduct";
 import { Link } from "react-router-dom";
-import { globalVars } from "../../constants/globalvars";
+import { colors } from "../../constants/colors";
+import { isOnSale } from "../../helpers/isOnSale";
+import { getSavingsAmt } from "../../helpers/getSavingsAmt";
 import { StyledMain, StyledLine, StyledHeader, StyledProductCard, StyledImage,
-         StyledText, StyledReviewArea, StyledPriceArea, StyledSalePrice,
-         StyledRegPrice, StyledSaveAmt, StyledButtonArea,
-         StyledShopAllText } from "./HottestDeal.styled";
+         StyledText, StyledReviewArea, StyledPriceArea, StyledSaveAmt,
+         StyledButtonArea, StyledShopAllText } from "./HottestDeal.styled";
 import Button from "../Buttons/Button";
 import StarRatingShow from "../StarRatingShow/StarRatingShow";
-
-/* TODO add navigation to product page to buy now button */
-/* TODO add navigation to category page to shop all deals */
+import SaleAmount from "../Price/SaleAmount";
 
 //--------------------------------------------------------------------
 function HottestDeal() {
-  const [hotDeal, setHotDeal] = useState([]);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const getHotDeal = async () => {
-      const url = "/products((offers.type=deal_of_the_day))?format=json&apiKey=" +
-                  globalVars.apiKey;
-      const response = await fetch(url);
-      if (response.ok) {
-        const data = await response.json();
-        setHotDeal(data.products[0]);
-      } else {
-        setError(response.error);
-      }
-    };
-    getHotDeal()
-  }, []);
-
-  /* function: deterime if item is on sale */
-  const isOnSale = (amt1, amt2) => {
-    if (amt1 > amt2) { return true } else {return false};
-  };
-
-  /* function: calculate savings amount */
-  const getSavingsAmt = (amt1, amt2) => {
-    return Number.parseFloat(amt1 - amt2).toFixed(2);
-  };
+  const productHook = useGetProduct("(offers.type=deal_of_the_day)");
+  const error = productHook.error || null;
+  const hotDeal = productHook.products[0] || [];
 
   //-----------------------------------------------------------------------
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else {
-    return (
-      <StyledMain>
-        <StyledLine />
-        <StyledHeader>Hottest Deal</StyledHeader>
-        <StyledProductCard>
-          <StyledImage src={hotDeal.largeImage} alt='hottest deal' />
-          <StyledText>{hotDeal.name}</StyledText>
-          <StyledReviewArea>
-            <StarRatingShow
-              Rating={hotDeal.customerReviewAverage}
-              Count={hotDeal.customerReviewCount}
-            />
-          </StyledReviewArea>
-          <StyledPriceArea>
-            <StyledSalePrice>$ {hotDeal.salePrice}</StyledSalePrice>
-            {isOnSale(hotDeal.regularPrice, hotDeal.salePrice) && (
-              <StyledRegPrice>
-                <StyledSaveAmt>
-                  save ${getSavingsAmt(hotDeal.regularPrice, hotDeal.salePrice)}
-                </StyledSaveAmt>
-                was $ {hotDeal.regularPrice}
-              </StyledRegPrice>
-            )}
-          </StyledPriceArea>
-          <StyledButtonArea>
+  return (
+    <StyledMain>
+      <StyledLine />
+      <StyledHeader>Hottest Deal</StyledHeader>
+      { error && <div>Error: {error}</div> }
+      <StyledProductCard>
+        <StyledImage
+          src={hotDeal.largeImage}
+          alt='hottest deal'
+        />
+        <StyledText>{hotDeal.name}</StyledText>
+        <StyledReviewArea>
+          <StarRatingShow
+            Rating={hotDeal.customerReviewAverage}
+            Count={hotDeal.customerReviewCount}
+          />
+        </StyledReviewArea>
+        <StyledPriceArea>
+          <SaleAmount
+            amount={hotDeal.salePrice}
+            size='50px'
+            color='current'
+          />
+          {isOnSale(
+            hotDeal.regularPrice,
+            hotDeal.salePrice
+          ) && (
+            <StyledSaveAmt>
+              <SaleAmount
+                prefix='save '
+                amount={getSavingsAmt(
+                  hotDeal.regularPrice,
+                  hotDeal.salePrice
+                )}
+                size='15px'
+                weight='bold'
+              />
+              <SaleAmount
+                prefix='was '
+                amount={hotDeal.regularPrice}
+                size='15px'
+                color={colors.grey}
+                weight='none'
+              />
+            </StyledSaveAmt>
+          )}
+        </StyledPriceArea>
+        <StyledButtonArea>
+          <Link
+            to={{
+              pathname: "/product",
+              state: { product: hotDeal },
+            }}
+          >
             <Button text='BUY NOW' />
-            <Link
-              to={{
-                pathname: "/category",
-                state: {
-                  urlSearch: "offers.type=deal_of_the_day",
-                  categoryId: "Hottest Deals",
-                },
-              }}
-            >
-              <StyledShopAllText>shop all deals</StyledShopAllText>
-            </Link>
-          </StyledButtonArea>
-        </StyledProductCard>
-      </StyledMain>
-    );
-  }
+          </Link>
+          <Link
+            to={{
+              pathname: "/category",
+              state: {
+                urlSearch: "(offers.type=deal_of_the_day)",
+                categoryId: "Hottest Deals",
+              },
+            }}
+          >
+            <StyledShopAllText>shop all deals</StyledShopAllText>
+          </Link>
+        </StyledButtonArea>
+      </StyledProductCard>
+    </StyledMain>
+  );
 }
 
 export default HottestDeal;

@@ -3,12 +3,12 @@ import { gutters } from "../constants/gutters";
 import { colors } from "../constants/colors";
 
 export const StyledCategorySection = styled.div`
-         display: flex;
-         flex-direction: row;
-         justify-content: center;
-         margin: ${gutters.halfGutter};
-         padding: ${gutters.noGutter};
-       `;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: ${gutters.halfGutter};
+  padding: ${gutters.noGutter};
+`;
 
 export const StyledCategoryListSection = styled.div`
   display: flex;

@@ -70,11 +70,11 @@ export const StyledPriceArea = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: start;
-  color: black;
 `;
 export const StyledSalePrice = styled.div`
-  font-size: 12px;
-  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
   margin: ${gutters.noGutter};
   margin-right: ${gutters.quarterGutter};
 `;
@@ -83,11 +83,19 @@ export const StyledNavArea = styled.div`
   flex-direction: row-reverse;
   background-color: ${colors.white};
 `;
-export const StyledArrow = styled.div`
-  color: red;
+export const StyledArrow = styled.button`
+  background: inherit;
+  border: none;
+  color: ${colors.secondary};
   margin: ${gutters.noGutter};
   padding: ${gutters.noGutter} ${gutters.quarterGutter};
   &:hover {
     cursor: pointer;
+  }
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    color: darkgrey;
   }
 `;

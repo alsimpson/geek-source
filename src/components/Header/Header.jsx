@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useContext } from "react";
+import { CategoryContext } from "../../App";
 import { colors } from "../../constants/colors";
 import logo from "../../assets/logo.png";
 import { StyledMain,
@@ -15,31 +15,24 @@ import ItemsInCart from "../ItemsInCart/ItemsInCart";
 /* TODO add homepage navigation to logo when clicked */
 /* TODO build component for recently viewed & saved items*/
 
-function Header({products}) {
+function Header() {
+  const categoryItems = useContext(CategoryContext);
     return (
         <StyledMain>
           <StyledHeaderTop>
             <StyledHeaderLogo src={logo} alt='logo' />
             <Search />
             <StyledCart>
-              <ItemsInCart items='0' color={colors.secondary} />
+              <ItemsInCart color={colors.secondary} />
             </StyledCart>
           </StyledHeaderTop>
           <StyledHeaderNav>
-            <DropDownList title='PRODUCTS' list={products} />
+            <DropDownList title='PRODUCTS' list={categoryItems} />
             <DropDownList title='RECENTLY VIEWED' />
             <DropDownList title='SAVED ITEMS' />
           </StyledHeaderNav>
         </StyledMain>
     );
   }
-
-Header.propTypes = {
-  products: PropTypes.array
-};
-
-Header.defaultProps = {
-  products: []
-};
 
 export default Header;

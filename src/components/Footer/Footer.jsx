@@ -22,11 +22,12 @@ import CcAmexIcon from "../Icons/CcAmexIcon";
 import CcApplePay from "../Icons/CcApplePayIcon";
 
 
-function Footer({ shopCategories, itemsInCart }) {
+function Footer({ itemsInCart }) {
+
   return (
     <StyledMain>
       <StyledFooterTop>
-        <ShopList list={shopCategories} />
+        <ShopList />
         <QuickLinks />
         <Search />
         <StyledCartArea>
@@ -62,12 +63,10 @@ function Footer({ shopCategories, itemsInCart }) {
 }
 
 Footer.propTypes = {
-  shopCategories: PropTypes.array,
   itemsInCart: PropTypes.number
 };
 
 Footer.defaultProps = {
-  shopCategories: [],
   itemsInCart: 0
 };
 
