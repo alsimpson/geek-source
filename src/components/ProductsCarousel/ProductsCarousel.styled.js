@@ -44,6 +44,9 @@ export const StyledProductCard = styled.div`
   min-width: 200px;
   max-height: 250px;
   min-height: 250px;
+  &:hover {
+    cursor:pointer;
+  }
 `;
 export const StyledImage = styled.img`
   margin: ${gutters.noGutter};

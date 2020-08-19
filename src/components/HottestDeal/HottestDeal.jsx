@@ -83,6 +83,7 @@ function HottestDeal() {
                 categoryId: "Hottest Deals",
               },
             }}
+            style={{textDecoration:'none'}}
           >
             <StyledShopAllText>shop all deals</StyledShopAllText>
           </Link>

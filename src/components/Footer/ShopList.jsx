@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { CategoryContext } from "../../App";
 import {
   StyledMain,
@@ -14,7 +15,20 @@ function ShopList() {
       <StyledListHeader>SHOP</StyledListHeader>
       <StyledList>
         {list.map((item) => (
-          <StyledListItem key={item.id}>{item.name}</StyledListItem>
+          <StyledListItem key={item.id}>
+            <Link
+              to={{
+                pathname: "/category",
+                state: {
+                  urlSearch: "(categoryPath.id=" + item.id + ")",
+                  categoryId: item.id,
+                },
+              }}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              {item.name}
+            </Link>
+          </StyledListItem>
         ))}
       </StyledList>
     </StyledMain>

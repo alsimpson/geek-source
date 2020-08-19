@@ -87,6 +87,7 @@ export const StyledShopAllText = styled.div`
   font-weight: bold;
   margin: ${gutters.noGutter};
   padding: ${gutters.noGutter};
+  text-decoration: none;
   &:hover {
     cursor: pointer;
   }

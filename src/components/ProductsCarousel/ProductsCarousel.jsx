@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useGetProduct } from "../../hooks/useGetProduct";
 import PropTypes from "prop-types";
 import { colors } from "../../constants/colors";
@@ -12,7 +13,7 @@ import ShoppingCartAddIcon from "../Icons/ShoppingCartAddIcon";
 import ArrowIcon from "../Icons/ArrowIcon";
 import SaleAmount from "../../components/Price/SaleAmount";
 
-/* TODO add navigation to product page when any part of product card clicked*/
+/* TODO improve styling of product card */
 
 function ProductsCarousel({header, query}) {
 
@@ -63,33 +64,41 @@ function ProductsCarousel({header, query}) {
             key={index}
             display={setInvisible(index) ? "none" : "flex"}
           >
-            <StyledImage src={p.mediumImage} alt='product' />
-            <StyledText>{p.name}</StyledText>
-            <StyledReviewArea>
-              <StarRatingShow
-                Rating={p.customerReviewAverage}
-                Count={p.customerReviewCount}
-              />
-            </StyledReviewArea>
-            <StyledPriceArea>
-              <StyledSalePrice>
-                <SaleAmount
-                  amount={p.salePrice}
-                  size='12px'
-                  weight='bold'
-                  color='black'
+            <Link
+              to={{
+                pathname: "/product",
+                state: { product: p },
+              }}
+              style={{ textDecoration: "none" }}
+            >
+              <StyledImage src={p.mediumImage} alt='product' />
+              <StyledText>{p.name}</StyledText>
+              <StyledReviewArea>
+                <StarRatingShow
+                  Rating={p.customerReviewAverage}
+                  Count={p.customerReviewCount}
                 />
-                {isOnSale(p.regularPrice, p.salePrice) && (
+              </StyledReviewArea>
+              <StyledPriceArea>
+                <StyledSalePrice>
                   <SaleAmount
-                    amount={<strike>{p.regularPrice}</strike>}
+                    amount={p.salePrice}
                     size='12px'
-                    color={colors.grey}
-                    weight='none'
+                    weight='bold'
+                    color='black'
                   />
-                )}
-              </StyledSalePrice>
-              <ShoppingCartAddIcon />
-            </StyledPriceArea>
+                  {isOnSale(p.regularPrice, p.salePrice) && (
+                    <SaleAmount
+                      amount={<strike>{p.regularPrice}</strike>}
+                      size='12px'
+                      color={colors.grey}
+                      weight='none'
+                    />
+                  )}
+                </StyledSalePrice>
+                <ShoppingCartAddIcon />
+              </StyledPriceArea>
+            </Link>
           </StyledProductCard>
         ))}
       </StyledCarouselArea>

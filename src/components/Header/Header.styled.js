@@ -24,6 +24,9 @@ export const StyledHeaderLogo = styled.img`
   width: 70px;
   margin-left: ${gutters.halfGutter};
   padding: ${gutters.noGutter};
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const StyledCart = styled.div`

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CategoryContext } from "../App";
 import { useGetProduct } from "../hooks/useGetProduct";
 import { getCategoryName } from "../helpers/getCategoryName";
 import { colors } from "../constants/colors";
@@ -27,28 +28,9 @@ function CategoryPage(props) {
   const productHook = useGetProduct(query);
   const error = productHook.error || null;
   const products = productHook.products || [];
-  const categoryName = getCategoryName(products, categoryId);
 
-  //const [categoryName, setCategoryName] = useState("Category Name");
-  //const [products, setProducts] = useState([]);
-  //const [error, setError] = useState(null);
-
-  /* get products list for category */
-/*  useEffect(() => {
-    const getProducts = (urlSearch) => {
-      const url ="/products" + urlSearch;
-      fetchData(url).then((response) => {
-        if (response.ok) {
-          setProducts(response.data.products);
-          setCategoryName(getCategoryName(response.data.products, categoryId));
-        } else {
-          setError(response.error);
-        }
-      });
-    };
-    getProducts(urlSearch);
-  },[urlSearch, categoryId]);
-*/
+  const categoryItems = useContext(CategoryContext);
+  const categoryName = getCategoryName(categoryItems, categoryId);
 
   //---------------------------------------------------------------------
   return (
@@ -63,6 +45,11 @@ function CategoryPage(props) {
             <StyledHeaderText>{categoryName}</StyledHeaderText>
           </StyledHeader>
           <StyledCategoryList>
+            {products.length <= 0 && (
+              <StyledText size='12px' color='black'>
+                No Products found for category
+              </StyledText>
+            )}
             {products.map((p, index) => (
               <StyledProductCard key={index}>
                 <StyledImage src={p.mediumImage} alt='product' />
