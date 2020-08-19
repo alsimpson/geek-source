@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledMain = styled("div")`
+export const StyledMain = styled.div`
   border-top: none;
   border-right: none;
   border-bottom: 1px solid black;
@@ -9,7 +9,11 @@ export const StyledMain = styled("div")`
   margin: 2%;
   padding: 0;
 `;
-export const StyledSearchText = styled("input")`
+
+export const StyledSearchText = styled.input`
   border: none;
   background-color: inherit;
+  &:focus {
+    outline: none;
+  }
 `;

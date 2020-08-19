@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { CategoryContext } from "../../App";
 import { colors } from "../../constants/colors";
 import logo from "../../assets/logo.png";
 import { StyledMain,
@@ -9,18 +8,19 @@ import { StyledMain,
          StyledCart,
          StyledHeaderNav } from "./Header.styled";
 
-import DropDownList from "../Buttons/DropDownList";
+import ProductsDropDownList from "../ProductsDropDownList/ProductsDropDownList";
+import DropDownListCarousel from "../Buttons/DropDownCarousel";
 import Search from "../Search/Search";
 import ItemsInCart from "../ItemsInCart/ItemsInCart";
 
 /* TODO build component for recently viewed & saved items*/
 
 function Header() {
-  const categoryItems = useContext(CategoryContext);
+
   return (
     <StyledMain>
       <StyledHeaderTop>
-        <Link to="/">
+        <Link to='/'>
           <StyledHeaderLogo src={logo} alt='logo' />
         </Link>
         <Search />
@@ -29,9 +29,9 @@ function Header() {
         </StyledCart>
       </StyledHeaderTop>
       <StyledHeaderNav>
-        <DropDownList title='PRODUCTS' list={categoryItems} />
-        <DropDownList title='RECENTLY VIEWED' />
-        <DropDownList title='SAVED ITEMS' />
+        <ProductsDropDownList />
+        <DropDownListCarousel title='RECENTLY VIEWED' />
+        <DropDownListCarousel title='SAVED ITEMS' />
       </StyledHeaderNav>
     </StyledMain>
   );

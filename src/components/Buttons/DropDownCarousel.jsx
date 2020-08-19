@@ -7,9 +7,9 @@ import { StyledMain,
          StyledDropDownHeaderTitle,
          StyledDropDownList,
          StyledListItem,
-        } from "./DropDownList.styled";
+        } from "./DropDownCarousel.styled";
 
-function DropDownList({title, list}) {
+function DropDownListCarousel({title, list}) {
   const [isOpen, setIsOpen] = useState(false);
 //  const [selectedOption, setSelectedOption] = useState(null);
 
@@ -41,14 +41,14 @@ function DropDownList({title, list}) {
   );
 }
 
-DropDownList.propTypes = {
+DropDownListCarousel.propTypes = {
   title: PropTypes.string,
-  list: PropTypes.array
+  list: PropTypes.array,
 };
 
-DropDownList.defaultProps = {
+DropDownListCarousel.defaultProps = {
   title: "Text Here",
-  list: [ {id: 0, name: "No items ..."} ]
+  list: [{ id: 0, name: "No items ..." }],
 };
 
-export default DropDownList;
+export default DropDownListCarousel;

@@ -11,4 +11,7 @@ export const StyledButton = styled.button`
   border-radius: 25px;
   border-color: ${colors.secondary};
   cursor: pointer;
+  &:focus {
+    outline: none;
+  }
 `;
