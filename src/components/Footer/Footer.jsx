@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { colors } from "../../constants/colors";
 import { StyledMain,
          StyledFooterTop,
+         StyledSearch,
          StyledCartArea,
          StyledPayIcons,
          StyledCcIcon,
@@ -29,7 +30,9 @@ function Footer({ itemsInCart }) {
       <StyledFooterTop>
         <ShopList />
         <QuickLinks />
-        <Search />
+        <StyledSearch>
+          <Search />
+        </StyledSearch>
         <StyledCartArea>
           <ItemsInCart items={itemsInCart} color={colors.grey} />
           <StyledPayIcons>

@@ -9,4 +9,5 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--primary);
   color: var(--white);
+  max-width: 1180px;
 }

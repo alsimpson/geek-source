@@ -5,8 +5,6 @@ import { StyledMain, StyledLine, StyledListHeader, StyledListItem,
          StyledText, StyledList, StyledArrow } from "./ShopByCategory.styled";
 import ArrowIcon from "../Icons/ArrowIcon";
 
-/* TODO add animation to list: see shop by category requirments for details*/
-
 function ShopByCategory() {
 
   const categoryItems = useContext(CategoryContext);

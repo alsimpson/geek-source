@@ -19,6 +19,11 @@ export const StyledFooterTop = styled.div`
   padding: ${gutters.noGutter} ${gutters.mainGutter};
 `;
 
+export const StyledSearch = styled.div`
+  margin: ${gutters.halfGutter};
+  padding: ${gutters.noGutter} ${gutters.quarterGutter};
+`;
+
 export const StyledCartArea = styled.div`
   display: flex;
   flex-direction: column;
