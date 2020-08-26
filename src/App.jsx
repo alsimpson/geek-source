@@ -1,32 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { fetchData } from "./helpers/fetchData";
 import Homepage from "./pages/Homepage";
 import CategoryPage from "./pages/CategoryPage";
 import ProductPage from "./pages/ProductPage";
+import { useGetCategories } from "./hooks/useGetCategories";
+import { useGetProduct } from "./hooks/useGetProduct";
 
-// global context for categories 
+// global context for categories
 export const CategoryContext = React.createContext([]);
+export const ProductsContext = React.createContext({});
 
 function App() {
 
-  /*API call for categories */
-  const [categoryItems, setCategoryItems] = useState([]);
-  useEffect(() => {
-    const getCategories = () => {
-      fetchData("/categories").then((response) => {
-        if (response.ok) {
-          setCategoryItems(response.data.categories);
-        } else {
-          console.log(response.error);
-        }
-      });
-    };
-    getCategories();
-  }, []);
+  const categoryItems = useGetCategories();
+  const featuredProducts = useGetProduct("(offers.type=special_offer)");
+  const todaysDeals = useGetProduct("(offers.type=digital_insert)");
+  const hotDeal = useGetProduct("(offers.type=deal_of_the_day)");
+
+  CategoryContext.displayName = 'Categories';
+  ProductsContext.displayName = 'HomepageProducts';
 
   return (
     <CategoryContext.Provider value={categoryItems}>
+      <ProductsContext.Provider value={{featured: featuredProducts,
+                                        todaysDeal:todaysDeals,
+                                        hottestDeal: hotDeal }}>
       <BrowserRouter>
         <Switch>
           <Route path='/' exact component={Homepage} />
@@ -34,6 +32,7 @@ function App() {
           <Route path='/product' component={ProductPage} />
         </Switch>
       </BrowserRouter>
+      </ProductsContext.Provider>
     </CategoryContext.Provider>
   );
 }

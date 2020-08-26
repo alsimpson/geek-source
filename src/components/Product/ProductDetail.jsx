@@ -17,7 +17,7 @@ function ProductDetail({product}) {
 
   return (
     <StyledMain>
-      <StyledImage src={product.mediumImage} alt='product' />
+      <StyledImage src={product.largeImage} alt='product' />
       <StyledTextSection>
         <StyledText size='18px' color='black' weight='bold'>
           {product.name}

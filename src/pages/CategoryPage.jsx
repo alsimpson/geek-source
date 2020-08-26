@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import PropTypes from "prop-types";
 import { CategoryContext } from "../App";
 import { useGetProduct } from "../hooks/useGetProduct";
 import { getCategoryName } from "../helpers/getCategoryName";
@@ -20,12 +21,9 @@ import SaleAmount from "../components/Price/SaleAmount";
 /*TODO add scrolling to product list & lazy load */
 
 // --------------------------------------------------------------------
-function CategoryPage(props) {
+function CategoryPage({location: {state: {urlSearch, categoryId}}}) {
 
-  const query = props.location.state.urlSearch || "(categoryPath.id=cat00000)";
-  const categoryId = props.location.state.categoryId || "cat00000";
-
-  const productHook = useGetProduct(query);
+  const productHook = useGetProduct(urlSearch);
   const error = productHook.error || null;
   const products = productHook.products || [];
 
@@ -104,5 +102,15 @@ function CategoryPage(props) {
     </>
   );
 }
+
+CategoryPage.propTypes = {
+  urlSearch: PropTypes.string,
+  categoryId: PropTypes.string,
+};
+
+CategoryPage.defaultProps = {
+  urlSearch: "(categoryPath.id=cat00000)",
+  categoryId: "cat00000",
+};
 
 export default CategoryPage;

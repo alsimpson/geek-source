@@ -5,10 +5,10 @@ import styled from "styled-components";
 export const StyledMain = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: .5;
+  flex-grow: 1;
   justify-content: center;
   margin: ${gutters.noGutter};
-  padding: ${gutters.mainGutter};
+  padding: ${gutters.mainGutter} ${gutters.doubleGutter};
   background-color: ${colors.white};
   color: ${colors.secondary};
 `;
@@ -34,14 +34,15 @@ export const StyledProductCard = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: ${gutters.noGutter};
-  padding: ${gutters.quarterGutter} ${gutters.doubleGutter};
+  padding: ${gutters.noGutter};
 `;
 
 export const StyledImage = styled.img`
-  margin: ${gutters.noGutter};
-  padding: ${gutters.halfGutter};
+  margin: ${gutters.halfGutter};
+  padding: ${gutters.noGutter};
+  align-self: flex-start;
   object-fit: contain;
-  object-position: left top;
+  vertical-align: bottom;
   &:hover {
     transform: scale(1.1);
   }
@@ -77,7 +78,7 @@ export const StyledButtonArea = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: ${gutters.noGutter};
   padding: ${gutters.quarterGutter};
 `;
@@ -85,7 +86,7 @@ export const StyledButtonArea = styled.div`
 export const StyledShopAllText = styled.div`
   color: black;
   font-weight: bold;
-  margin: ${gutters.noGutter};
+  margin: ${gutters.noGutter} ${gutters.doubleGutter};
   padding: ${gutters.noGutter};
   text-decoration: none;
   &:hover {

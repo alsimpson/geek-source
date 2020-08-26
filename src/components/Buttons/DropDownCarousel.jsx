@@ -8,29 +8,25 @@ import { StyledMain,
          StyledDropDownList,
          StyledListItem,
         } from "./DropDownCarousel.styled";
+import useMouseClick from "../../hooks/useMouseClick";
 
 function DropDownListCarousel({title, list}) {
   const [isOpen, setIsOpen] = useState(false);
-//  const [selectedOption, setSelectedOption] = useState(null);
-
-  const toggling = () => setIsOpen(!isOpen);
-
-  const onOptionClicked = (value) => () => {
-//    setSelectedOption(value);
-    setIsOpen(false);
-  };
+  const { innerRef } = useMouseClick(
+    () => setIsOpen(!isOpen), //user clicked on component: toggle list
+    () => setIsOpen(false));  //user clicked outside of component: close list
 
   return (
-    <StyledMain>
+    <StyledMain ref={innerRef}>
       <StyledDropDownContainer>
-        <StyledDropDownHeader onClick={toggling}>
+        <StyledDropDownHeader>
           <StyledDropDownHeaderTitle>{title}</StyledDropDownHeaderTitle>
           {isOpen ? <ArrowIcon direction='up' /> : <ArrowIcon direction='down' />}
         </StyledDropDownHeader>
         {isOpen && (
           <StyledDropDownList>
             {list.map((item) => (
-              <StyledListItem onClick={onOptionClicked(item.url)} key={item.id}>
+              <StyledListItem key={item.id}>
                 {item.name}
               </StyledListItem>
             ))}

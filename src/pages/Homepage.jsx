@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ProductsContext } from "../App";
 import { StyledHotDealArea } from "./Homepage.styled";
 import Header from "../components/Header/Header";
 import HeroImage from "../components/HeroImage/HeroImage";
@@ -9,17 +10,19 @@ import Footer from "../components/Footer/Footer";
 
 function Homepage() {
 
+  const products = useContext(ProductsContext);
+
   return (
     <>
       <Header />
       <HeroImage />
       <ProductsCarousel
         header='Featured Products'
-        query='(offers.type=special_offer)'
+        products={products.featured.products}
       />
       <ProductsCarousel
         header="Today's Deals"
-        query='(offers.type=digital_insert)'
+        products={products.todaysDeal.products}
       />
       <StyledHotDealArea>
         <HottestDeal />

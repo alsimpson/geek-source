@@ -5,6 +5,7 @@ export const StyledHotDealArea = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: ${gutters.halfGutter} ${gutters.mainGutter};
+  margin: ${gutters.halfGutter} ${gutters.noGutter};
+  margin-right: ${gutters.mainGutter};
   padding: ${gutters.noGutter};
 `;

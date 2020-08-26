@@ -12,11 +12,11 @@ export const StyledMain = styled.div`
 `;
 
 export const StyledImage = styled.img`
-  margin: ${gutters.doubleGutter};
-  padding: ${gutters.quarterGutter};
-  width: 50%;
+  margin: ${gutters.mainGutter} ${gutters.doubleGutter};
+  padding: ${gutters.noGutter};
+  align-self: flex-start;
   object-fit: contain;
-  object-position: left top;
+  vertical-align: bottom;
   &:hover {
     transform: scale(1.1);
   }

@@ -49,10 +49,11 @@ export const StyledProductCard = styled.div`
   }
 `;
 export const StyledImage = styled.img`
-  margin: ${gutters.noGutter};
-  padding: ${gutters.quarterGutter};
+  margin: ${gutters.halfGutter};
+  padding: ${gutters.noGutter};
+  align-self: flex-start;
   object-fit: contain;
-  object-position: left top;
+  vertical-align: bottom;
   &:hover {
     transform: scale(1.1);
   }
@@ -83,7 +84,8 @@ export const StyledSalePrice = styled.div`
 `;
 export const StyledNavArea = styled.div`
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row nowrap;
+  justify-content: flex-end;
   background-color: ${colors.white};
 `;
 export const StyledArrow = styled.button`

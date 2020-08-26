@@ -1,5 +1,5 @@
-import React from "react";
-import { useGetProduct } from "../../hooks/useGetProduct";
+import React, { useContext } from "react";
+import { ProductsContext } from "../../App";
 import { Link } from "react-router-dom";
 import { colors } from "../../constants/colors";
 import { isOnSale } from "../../helpers/isOnSale";
@@ -14,21 +14,17 @@ import SaleAmount from "../Price/SaleAmount";
 //--------------------------------------------------------------------
 function HottestDeal() {
 
-  const productHook = useGetProduct("(offers.type=deal_of_the_day)");
-  const error = productHook.error || null;
-  const hotDeal = productHook.products[0] || [];
+  const products = useContext(ProductsContext);
+  const hotDeal = products.hottestDeal.products[0] || [];
 
   //-----------------------------------------------------------------------
   return (
     <StyledMain>
       <StyledLine />
       <StyledHeader>Hottest Deal</StyledHeader>
-      { error && <div>Error: {error}</div> }
+      {hotDeal.length <= 0 && <StyledText>No product data found.</StyledText>}
       <StyledProductCard>
-        <StyledImage
-          src={hotDeal.largeImage}
-          alt='hottest deal'
-        />
+        <StyledImage src={hotDeal.largeImage} alt='hottest deal' />
         <StyledText>{hotDeal.name}</StyledText>
         <StyledReviewArea>
           <StarRatingShow
@@ -37,22 +33,12 @@ function HottestDeal() {
           />
         </StyledReviewArea>
         <StyledPriceArea>
-          <SaleAmount
-            amount={hotDeal.salePrice}
-            size='50px'
-            color='current'
-          />
-          {isOnSale(
-            hotDeal.regularPrice,
-            hotDeal.salePrice
-          ) && (
+          <SaleAmount amount={hotDeal.salePrice} size='50px' color='current' />
+          {isOnSale(hotDeal.regularPrice, hotDeal.salePrice) && (
             <StyledSaveAmt>
               <SaleAmount
                 prefix='save '
-                amount={getSavingsAmt(
-                  hotDeal.regularPrice,
-                  hotDeal.salePrice
-                )}
+                amount={getSavingsAmt(hotDeal.regularPrice, hotDeal.salePrice)}
                 size='15px'
                 weight='bold'
               />
@@ -83,7 +69,7 @@ function HottestDeal() {
                 categoryId: "Hottest Deals",
               },
             }}
-            style={{textDecoration:'none'}}
+            style={{ textDecoration: "none" }}
           >
             <StyledShopAllText>shop all deals</StyledShopAllText>
           </Link>

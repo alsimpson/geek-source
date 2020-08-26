@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useGetProduct } from "../../hooks/useGetProduct";
 import PropTypes from "prop-types";
 import { colors } from "../../constants/colors";
 import { isOnSale } from "../../helpers/isOnSale";
@@ -15,13 +14,9 @@ import SaleAmount from "../../components/Price/SaleAmount";
 
 /* TODO improve styling of product card */
 
-function ProductsCarousel({header, query}) {
+function ProductsCarousel({header, products}) {
 
-    const productHook = useGetProduct(query);
-    const error = productHook.error || null;
-    const products = productHook.products || [];
     const maxIndex = (products.length - 1);
-
     const [currIndex, setCurrIndex] = useState(0);
     const [hideIndex, setHideIndex] = useState([]);
 
@@ -58,7 +53,7 @@ function ProductsCarousel({header, query}) {
       <StyledLine />
       <StyledHeader>{header}</StyledHeader>
       <StyledCarouselArea>
-        {error && <StyledText>Error: {error}</StyledText>}
+        {(products.length <= 0) && <StyledText>No product data found.</StyledText>}
         {products.map((p, index) => (
           <StyledProductCard
             key={index}
@@ -104,16 +99,16 @@ function ProductsCarousel({header, query}) {
       </StyledCarouselArea>
       <StyledNavArea>
         <StyledArrow
-          disabled={currIndex === maxIndex}
-          onClick={() => onRightArrowClick(currIndex)}
-        >
-          <ArrowIcon direction='right' size='lg' />
-        </StyledArrow>
-        <StyledArrow
           disabled={currIndex === 0}
           onClick={() => onLeftArrowClick(currIndex)}
         >
           <ArrowIcon direction='left' size='lg' />
+        </StyledArrow>
+        <StyledArrow
+          disabled={currIndex === maxIndex}
+          onClick={() => onRightArrowClick(currIndex)}
+        >
+          <ArrowIcon direction='right' size='lg' />
         </StyledArrow>
       </StyledNavArea>
     </StyledMain>
@@ -122,12 +117,12 @@ function ProductsCarousel({header, query}) {
 
 ProductsCarousel.propTypes = {
   header: PropTypes.string,
-  query: PropTypes.string
+  products: PropTypes.array,
 };
 
 ProductsCarousel.defaultProps = {
   header: "Text Here",
-  query: null
+  products: [],
 };
 
 export default ProductsCarousel;

@@ -9,29 +9,28 @@ import { StyledMain,
          StyledDropDownList,
          StyledListItem,
         } from "./ProductsDropDownList.styled";
+import useMouseClick from "../../hooks/useMouseClick";
 
 function ProductsDropDownList() {
 
   const categoryItems = useContext(CategoryContext);
   const [isOpen, setIsOpen] = useState(false);
-
-  const toggling = () => setIsOpen(!isOpen);
-
-  const onOptionClicked = () => () => {
-    setIsOpen(false);
-  };
+  const { innerRef } = useMouseClick(
+    () => setIsOpen(!isOpen),  //user clicked on component: toggle list
+    () => setIsOpen(false)     //user clicked outside of component: close list
+  );
 
   return (
-    <StyledMain>
+    <StyledMain ref={innerRef}>
       <StyledDropDownContainer>
-        <StyledDropDownHeader onClick={toggling}>
+        <StyledDropDownHeader>
           <StyledDropDownHeaderTitle>PRODUCTS</StyledDropDownHeaderTitle>
           {isOpen ? (<ArrowIcon direction='up' />) : (<ArrowIcon direction='down' />)}
         </StyledDropDownHeader>
         {isOpen && (
           <StyledDropDownList>
             {categoryItems.map((item) => (
-              <StyledListItem onClick={onOptionClicked()} key={item.id}>
+              <StyledListItem key={item.id}>
                 <Link
                   to={{
                     pathname: "/category",
