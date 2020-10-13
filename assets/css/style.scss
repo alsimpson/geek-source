@@ -1,0 +1,39 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+$gutter: 20px;
+
+body {
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+a {
+  &:hover {
+    font-weight: normal;
+    text-decoration: underline;
+  }
+}
+
+#sidebar-nav {
+  margin: $gutter 0;
+
+  a {
+    display: block;
+
+    &:before {
+      content: "•";
+      padding-right: 6px;
+    }
+  }
+}
+
+#breadcrumbs {
+  margin-bottom: $gutter;
+
+  a {
+    text-transform: capitalize;
+  }
+}
