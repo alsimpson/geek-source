@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import ArrowIcon from "../Icons/ArrowIcon";
 import { StyledMain,
@@ -6,30 +6,39 @@ import { StyledMain,
          StyledDropDownHeader,
          StyledDropDownHeaderTitle,
          StyledDropDownList,
-         StyledListItem,
         } from "./DropDownCarousel.styled";
 import useMouseClick from "../../hooks/useMouseClick";
+import ProductsCarousel from "../ProductsCarousel/ProductsCarousel";
 
-function DropDownListCarousel({title, list}) {
+function DropDownCarousel({title, listKey}) {
   const [isOpen, setIsOpen] = useState(false);
+  const [products, setProducts] = useState([]);
   const { innerRef } = useMouseClick(
     () => setIsOpen(!isOpen), //user clicked on component: toggle list
     () => setIsOpen(false));  //user clicked outside of component: close list
+
+  useEffect(() => {
+    const newProducts = JSON.parse(localStorage.getItem(listKey)) || [];
+    setProducts(newProducts);
+  }, [listKey]);
 
   return (
     <StyledMain ref={innerRef}>
       <StyledDropDownContainer>
         <StyledDropDownHeader>
           <StyledDropDownHeaderTitle>{title}</StyledDropDownHeaderTitle>
-          {isOpen ? <ArrowIcon direction='up' /> : <ArrowIcon direction='down' />}
+          {isOpen ? (
+            <ArrowIcon direction='up' />
+          ) : (
+            <ArrowIcon direction='down' />
+          )}
         </StyledDropDownHeader>
         {isOpen && (
           <StyledDropDownList>
-            {list.map((item) => (
-              <StyledListItem key={item.id}>
-                {item.name}
-              </StyledListItem>
-            ))}
+            <ProductsCarousel
+              header={title}
+              products={products}
+            />
           </StyledDropDownList>
         )}
       </StyledDropDownContainer>
@@ -37,14 +46,14 @@ function DropDownListCarousel({title, list}) {
   );
 }
 
-DropDownListCarousel.propTypes = {
+DropDownCarousel.propTypes = {
   title: PropTypes.string,
-  list: PropTypes.array,
+  listKey: PropTypes.string,
 };
 
-DropDownListCarousel.defaultProps = {
+DropDownCarousel.defaultProps = {
   title: "Text Here",
-  list: [{ id: 0, name: "No items ..." }],
+  listKey: "Items",
 };
 
-export default DropDownListCarousel;
+export default DropDownCarousel;

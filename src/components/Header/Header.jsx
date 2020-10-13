@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { colors } from "../../constants/colors";
+import { globalVars } from "../../constants/globalvars";
 import logo from "../../assets/logo.png";
 import { StyledMain,
          StyledHeaderTop,
@@ -9,11 +10,9 @@ import { StyledMain,
          StyledHeaderNav } from "./Header.styled";
 
 import ProductsDropDownList from "../ProductsDropDownList/ProductsDropDownList";
-import DropDownListCarousel from "../Buttons/DropDownCarousel";
+import DropDownCarousel from "../Buttons/DropDownCarousel";
 import Search from "../Search/Search";
 import ItemsInCart from "../ItemsInCart/ItemsInCart";
-
-/* TODO build component for recently viewed & saved items*/
 
 function Header() {
 
@@ -30,8 +29,14 @@ function Header() {
       </StyledHeaderTop>
       <StyledHeaderNav>
         <ProductsDropDownList />
-        <DropDownListCarousel title='RECENTLY VIEWED' />
-        <DropDownListCarousel title='SAVED ITEMS' />
+        <DropDownCarousel
+          title='RECENTLY VIEWED'
+          listKey={globalVars.keyRecentlyViewed}
+        />
+        <DropDownCarousel
+          title='SAVED ITEMS'
+          listKey={globalVars.keySavedItems}
+        />
       </StyledHeaderNav>
     </StyledMain>
   );

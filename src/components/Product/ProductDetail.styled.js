@@ -69,3 +69,15 @@ export const StyledSaveAmt = styled.div`
   margin: ${gutters.noGutter};
   padding: ${gutters.noGutter} ${gutters.quarterGutter};
 `;
+
+export const StyledSaveItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-self: flex-start;
+  align-items: baseline;
+  color: black;
+  margin: ${gutters.noGutter};
+  padding: ${gutters.noGutter};
+  &:hover { cursor: pointer };
+  &:disabled { cursor: none };
+`;
